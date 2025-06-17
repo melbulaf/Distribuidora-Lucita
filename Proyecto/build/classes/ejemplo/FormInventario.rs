@@ -1,0 +1,5 @@
+Paquete_de_fuentes.FormInventario$4
+Paquete_de_fuentes.FormInventario$3
+Paquete_de_fuentes.FormInventario
+Paquete_de_fuentes.FormInventario$2
+Paquete_de_fuentes.FormInventario$1

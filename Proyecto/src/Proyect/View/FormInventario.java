@@ -189,26 +189,35 @@ public class FormInventario extends javax.swing.JPanel {
         String NombreCodigo = CampoBusqueda.getText();
         Producto encontrado = null;
         try {
-            int codigoBuscado = Integer.parseInt(NombreCodigo);// evaluar si es codigo
+            int codigoBuscado = Integer.parseInt(NombreCodigo); // evaluar si es código
             for (Producto p : Inventario.productos) {
                 if (p.getCodigo() == codigoBuscado) {
                     encontrado = p;
                     break;
                 }
             }
-        } catch (NumberFormatException e) { // evaluar para buscar por nombre
+        } catch (NumberFormatException e) { // si no es número, buscar por nombre
             for (Producto p : Inventario.productos) {
                 if (p.nombre.equalsIgnoreCase(NombreCodigo)) {
                     encontrado = p;
-                    break; }
-                
+                    break;
+                }
+            }
+        }
+
         if (encontrado != null) {
             MensajeError.setVisible(false);
             DefaultTableModel modelo = (DefaultTableModel) TablaProductos.getModel();
-            if (modelo.getRowCount() > 0) {
-                modelo.removeRow(0); // Elimina la primera fila (índice 0)
+            while (modelo.getRowCount() > 0) {
+                modelo.removeRow(0);
             }
-            modelo.addRow(new Object[]{encontrado.codigo, encontrado.nombre, encontrado.categoria, encontrado.precio, encontrado.cantidad});
+            modelo.addRow(new Object[]{
+                encontrado.getCodigo(),
+                encontrado.nombre,
+                encontrado.categoria,
+                encontrado.precio,
+                encontrado.cantidad
+            });
         } else {
             MensajeError.setVisible(true);
             MensajeError.setText("Producto no registrado en el inventario");

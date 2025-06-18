@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Proyect.Model;
+import Proyect.Model.Inventario;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Producto {
         this.precio = precio;
         this.cantidad = cantidad;
         this.categoria = categoria;
+        Inventario.getInstancia().agregarProducto(this);
     }
     public Producto(String nombre, int cantidad) {
     this.nombre = nombre;
@@ -28,6 +30,7 @@ public class Producto {
     this.codigo = contador++;
     this.precio = 0.0;
     this.categoria = "";
+    Inventario.getInstancia().agregarProducto(this);
 }
     public Producto(String nombre, String categoria, double precio){
         this.codigo = contador++;
@@ -35,6 +38,7 @@ public class Producto {
         this.precio = precio;
         this.cantidad = 0;
         this.categoria = categoria;
+        Inventario.getInstancia().agregarProducto(this);
     }
     
     public int getCodigo(){

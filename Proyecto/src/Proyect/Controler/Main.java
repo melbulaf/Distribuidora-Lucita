@@ -28,10 +28,5 @@ public class Main {
                 new Inicio().setVisible(true);
             }
         });
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Inicio().setVisible(true);
-            }
-        });
     }
 }

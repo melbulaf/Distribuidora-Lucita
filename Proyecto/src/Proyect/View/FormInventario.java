@@ -188,13 +188,20 @@ public class FormInventario extends javax.swing.JPanel {
     private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
         String NombreCodigo = CampoBusqueda.getText();
         Producto encontrado = null;
-        for (Producto p : Inventario.arregloInventario) {
-            if (p.nombre.equals(NombreCodigo)||p.codigo.equals(NombreCodigo)) {
-                encontrado = p;
-                break; // detener al encontrar el primero
+        try {
+            int codigoBuscado = Integer.parseInt(NombreCodigo);// evaluar si es codigo
+            for (Producto p : Inventario.productos) {
+                if (p.getCodigo() == codigoBuscado) {
+                    encontrado = p;
+                    break;
+                }
             }
-        }
-
+        } catch (NumberFormatException e) { // evaluar para buscar por nombre
+            for (Producto p : Inventario.productos) {
+                if (p.nombre.equalsIgnoreCase(NombreCodigo)) {
+                    encontrado = p;
+                    break; }
+                
         if (encontrado != null) {
             MensajeError.setVisible(false);
             DefaultTableModel modelo = (DefaultTableModel) TablaProductos.getModel();

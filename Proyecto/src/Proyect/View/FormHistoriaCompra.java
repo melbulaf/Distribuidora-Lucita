@@ -90,7 +90,9 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCompraActionPerformed
-        // TODO add your handling code here:
+        FormCompra formCompra = new FormCompra();
+        formCompra.setSize(460,360);
+        formCompra.setVisible(true);
     }//GEN-LAST:event_agregarCompraActionPerformed
 
 

@@ -13,12 +13,14 @@ package Proyect.View;
 import Proyect.Model.MisDatosDeEjemplo;
 import Proyect.View.FormInventario;
 import Proyect.View.FormRutas;
+import Proyect.View.FormHistoriaCompra;
 import Proyect.Model.Ruta;
 import java.util.ArrayList;
 
 public class Inicio extends javax.swing.JFrame {
     // === VARIABLES GLOBALES ===
     private FormInventario objFormInventario;
+    private FormHistoriaCompra objFormHCompras;
     private javax.swing.JMenuItem menuItemRutaDelDia;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
@@ -37,8 +39,8 @@ public class Inicio extends javax.swing.JFrame {
         
         objFormInventario = new FormInventario();
         jifFormInventario.setContentPane(objFormInventario);
-        objFormInventario.setSize(800,800);
-        jifFormInventario.setSize(800,800);
+        objFormInventario.setSize(700,500);
+        jifFormInventario.setSize(700,500);
         jifFormInventario.setVisible(false);
 
         // Ruta del Día
@@ -51,6 +53,14 @@ public class Inicio extends javax.swing.JFrame {
         jifFormRutas.setVisible(false);
         desktopPane.add(jifFormRutas);
         jifFormRutas.setBounds(10, 10, 700, 500);
+        
+        // Compras
+        objFormHCompras = new FormHistoriaCompra();
+        jifFormHCompras.setContentPane(objFormHCompras);
+        objFormHCompras.setSize(700,500);
+        jifFormHCompras.setSize(700,500);
+        jifFormHCompras.setVisible(false);
+        
     }
 
     // === AGREGA EL MENÚ Y SU ACCIÓN ===
@@ -79,10 +89,12 @@ public class Inicio extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         jifFormInventario = new javax.swing.JInternalFrame();
+        jifFormHCompras = new javax.swing.JInternalFrame();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         InventarioMenuItem = new javax.swing.JMenuItem();
         salirMenuItem = new javax.swing.JMenuItem();
+        Compras = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
@@ -112,8 +124,34 @@ public class Inicio extends javax.swing.JFrame {
         jifFormInventario.setBounds(0, 0, 770, 510);
         jifFormInventario.getAccessibleContext().setAccessibleDescription("");
 
-        fileMenu.setText("File");
+        jifFormHCompras.setClosable(true);
+        jifFormHCompras.setIconifiable(true);
+        jifFormHCompras.setMaximizable(true);
+        jifFormHCompras.setVisible(true);
 
+        javax.swing.GroupLayout jifFormHComprasLayout = new javax.swing.GroupLayout(jifFormHCompras.getContentPane());
+        jifFormHCompras.getContentPane().setLayout(jifFormHComprasLayout);
+        jifFormHComprasLayout.setHorizontalGroup(
+            jifFormHComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jifFormHComprasLayout.setVerticalGroup(
+            jifFormHComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        desktopPane.add(jifFormHCompras);
+        jifFormHCompras.setBounds(-10, -10, 550, 530);
+
+        fileMenu.setMnemonic('f');
+        fileMenu.setText("File");
+        fileMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileMenuActionPerformed(evt);
+            }
+        });
+
+        InventarioMenuItem.setMnemonic('o');
         InventarioMenuItem.setText("Inventario");
         InventarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +160,7 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(InventarioMenuItem);
 
+        salirMenuItem.setMnemonic('x');
         salirMenuItem.setText("Salir");
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,29 +169,45 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(salirMenuItem);
 
+        Compras.setText("Compras");
+        Compras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComprasActionPerformed(evt);
+            }
+        });
+        fileMenu.add(Compras);
+
         menuBar.add(fileMenu);
 
+        editMenu.setMnemonic('e');
         editMenu.setText("Edit");
 
+        cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Cut");
         editMenu.add(cutMenuItem);
 
+        copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Copy");
         editMenu.add(copyMenuItem);
 
+        pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Paste");
         editMenu.add(pasteMenuItem);
 
+        deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Delete");
         editMenu.add(deleteMenuItem);
 
         menuBar.add(editMenu);
 
+        helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
 
+        contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Contents");
         helpMenu.add(contentMenuItem);
 
+        aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("About");
         helpMenu.add(aboutMenuItem);
 
@@ -184,9 +239,18 @@ public class Inicio extends javax.swing.JFrame {
         jifFormInventario.setVisible(true);
     }//GEN-LAST:event_InventarioMenuItemActionPerformed
 
+    private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileMenuActionPerformed
+
+    private void ComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprasActionPerformed
+        jifFormHCompras.setVisible(true);
+    }//GEN-LAST:event_ComprasActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Compras;
     private javax.swing.JMenuItem InventarioMenuItem;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
@@ -197,6 +261,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JInternalFrame jifFormHCompras;
     private javax.swing.JInternalFrame jifFormInventario;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem pasteMenuItem;

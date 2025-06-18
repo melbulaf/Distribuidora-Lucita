@@ -14,12 +14,14 @@ public class Producto {
     private static int contador = 1000;
     public String nombre;
     public double precio;
+    public double precioC;
     public int cantidad;
     public String categoria;
-    public Producto(String nombre, String categoria, double precio, int cantidad){
+    public Producto(String nombre, String categoria, double precio,double precioC, int cantidad){
         this.codigo = contador++;
         this.nombre = nombre;
         this.precio = precio;
+        this.precioC = precioC;
         this.cantidad = cantidad;
         this.categoria = categoria;
         Inventario.getInstancia().agregarProducto(this);
@@ -29,13 +31,15 @@ public class Producto {
     this.cantidad = cantidad;
     this.codigo = contador++;
     this.precio = 0.0;
+    this.precioC = 0.0;
     this.categoria = "";
     Inventario.getInstancia().agregarProducto(this);
 }
-    public Producto(String nombre, String categoria, double precio){
+    public Producto(String nombre, String categoria, double precio, double precioC){
         this.codigo = contador++;
         this.nombre = nombre;
         this.precio = precio;
+        this.precioC = precioC;
         this.cantidad = 0;
         this.categoria = categoria;
         Inventario.getInstancia().agregarProducto(this);

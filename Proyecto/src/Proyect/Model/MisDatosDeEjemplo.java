@@ -20,11 +20,11 @@ import java.util.Arrays;
 public class MisDatosDeEjemplo {
     
     public static void crearProductos() {
-        Producto p1 = new Producto("Galleta Punto", "Galleta", 6500);
-        Producto p2 = new Producto("Galleta Cuca", "Galleta", 6500);
-        Producto p3 = new Producto("Bombombun", "Golosina", 10000);
-        Producto p4 = new Producto("Rollo", "Pastel", 7000);
-        Producto p5 = new Producto("Cigarrillos", "Miscelanea", 20000);
+        Producto p1 = new Producto("Galleta Punto", "Galleta", 6500, 5525);
+        Producto p2 = new Producto("Galleta Cuca", "Galleta", 6500, 5525);
+        Producto p3 = new Producto("Bombombun", "Golosina", 10000, 8500);
+        Producto p4 = new Producto("Rollo", "Pastel", 7000, 5950);
+        Producto p5 = new Producto("Cigarrillos", "Miscelanea", 20000, 17000);
     }
     
     public static ArrayList<Ruta> crearRutas() {

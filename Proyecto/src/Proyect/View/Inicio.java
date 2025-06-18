@@ -83,6 +83,7 @@ public class Inicio extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         InventarioMenuItem = new javax.swing.JMenuItem();
         salirMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
@@ -112,8 +113,10 @@ public class Inicio extends javax.swing.JFrame {
         jifFormInventario.setBounds(0, 0, 770, 510);
         jifFormInventario.getAccessibleContext().setAccessibleDescription("");
 
+        fileMenu.setMnemonic('f');
         fileMenu.setText("File");
 
+        InventarioMenuItem.setMnemonic('o');
         InventarioMenuItem.setText("Inventario");
         InventarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +125,7 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(InventarioMenuItem);
 
+        salirMenuItem.setMnemonic('x');
         salirMenuItem.setText("Salir");
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,29 +134,45 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(salirMenuItem);
 
+        jMenuItem1.setText("Registrar producto");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem1);
+
         menuBar.add(fileMenu);
 
+        editMenu.setMnemonic('e');
         editMenu.setText("Edit");
 
+        cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Cut");
         editMenu.add(cutMenuItem);
 
+        copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Copy");
         editMenu.add(copyMenuItem);
 
+        pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Paste");
         editMenu.add(pasteMenuItem);
 
+        deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Delete");
         editMenu.add(deleteMenuItem);
 
         menuBar.add(editMenu);
 
+        helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
 
+        contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Contents");
         helpMenu.add(contentMenuItem);
 
+        aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("About");
         helpMenu.add(aboutMenuItem);
 
@@ -184,6 +204,11 @@ public class Inicio extends javax.swing.JFrame {
         jifFormInventario.setVisible(true);
     }//GEN-LAST:event_InventarioMenuItemActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FormRegistrarProducto a = new FormRegistrarProducto();
+        a.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -197,6 +222,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JInternalFrame jifFormInventario;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem pasteMenuItem;

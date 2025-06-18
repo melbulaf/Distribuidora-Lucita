@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7696dcee-ce98-4234-8950-3421b1b418d1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Model/Inventario.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Model/Inventario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Model/Producto.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Model/Producto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/Controler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/Controler/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/Model/Inventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/Model/Inventario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/Model/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/Model/Producto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/View/Inicio.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/View/Inicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/View/Inicio.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Proyecto/src/Proyect/Model/Venta.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2yevT7ZR03bnD7mv24Q2Rzmbksk" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pc/Documents/Distribuidora-Lucita&quot;
+  }
+}</component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7696dcee-ce98-4234-8950-3421b1b418d1" name="Changes" comment="" />
+      <created>1750207857258</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1750207857258</updated>
+    </task>
+    <servers />
+  </component>
+</project>

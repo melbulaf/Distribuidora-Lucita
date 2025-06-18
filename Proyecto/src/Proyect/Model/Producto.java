@@ -9,13 +9,14 @@ package Proyect.Model;
  * @author Samuel
  */
 public class Producto {
-    public String codigo;
+    private final int codigo;
+    private static int contador = 1000;
     public String nombre;
     public double precio;
     public int cantidad;
     public String categoria;
-    public Producto(String codigo, String nombre, String categoria, double precio, int cantidad){
-        this.codigo = codigo;
+    public Producto(String nombre, String categoria, double precio, int cantidad){
+        this.codigo = contador++;
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
@@ -24,8 +25,19 @@ public class Producto {
     public Producto(String nombre, int cantidad) {
     this.nombre = nombre;
     this.cantidad = cantidad;
-    this.codigo = "";
+    this.codigo = contador++;
     this.precio = 0.0;
     this.categoria = "";
 }
+    public Producto(String nombre, String categoria, double precio){
+        this.codigo = contador++;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = 0;
+        this.categoria = categoria;
+    }
+    
+    public int getCodigo(){
+        return this.codigo;
+    }
 }

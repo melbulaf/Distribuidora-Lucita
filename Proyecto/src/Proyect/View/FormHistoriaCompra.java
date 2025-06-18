@@ -4,6 +4,11 @@
  */
 package Proyect.View;
 
+import Proyect.Model.Inventario;
+import Proyect.Model.Producto;
+import Proyect.Model.Compra;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Rifter
@@ -15,6 +20,20 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
      */
     public FormHistoriaCompra() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) TablaHistorial.getModel();
+            while (modelo.getRowCount() > 0) {
+                modelo.removeRow(0);
+            }
+            for (int i = Compra.compras.size() - 1; i >= 0; i--) {
+                Compra p = Compra.compras.get(i);
+                modelo.addRow(new Object[]{
+                    p.producto.getCodigo(),
+                    p.producto.nombre,
+                    p.cantidad,
+                    p.producto.precioC,
+                    p.total
+                });
+            }
     }
 
     /**
@@ -90,11 +109,25 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCompraActionPerformed
-        FormCompra formCompra = new FormCompra();
+        FormCompra formCompra = new FormCompra(this);
         formCompra.setSize(460,360);
         formCompra.setVisible(true);
     }//GEN-LAST:event_agregarCompraActionPerformed
-
+    
+    public void actualizarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) TablaHistorial.getModel();
+        modelo.setRowCount(0); // Limpia la tabla
+        for (int i = Compra.compras.size() - 1; i >= 0; i--) {
+            Compra p = Compra.compras.get(i);
+            modelo.addRow(new Object[]{
+                p.producto.getCodigo(),
+                p.producto.nombre,
+                p.cantidad,
+                p.producto.precioC,
+                p.total
+            });
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaHistorial;

@@ -6,6 +6,7 @@ package Proyect.View;
 import Proyect.Model.Producto;
 import Proyect.Model.Inventario;
 import javax.swing.JOptionPane;
+import Proyect.Model.Compra;
 
 /**
  *
@@ -14,7 +15,12 @@ import javax.swing.JOptionPane;
 public class FormCompra extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormCompra.class.getName());
+    private FormHistoriaCompra historial;
 
+    public FormCompra(FormHistoriaCompra historial) {
+        this.historial = historial;
+        initComponents();
+    }
     /**
      * Creates new form FormCompra
      */
@@ -143,9 +149,9 @@ public class FormCompra extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(precioUnd, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(precioUnd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(total, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(volver)
                 .addGap(16, 16, 16))
@@ -183,10 +189,17 @@ public class FormCompra extends javax.swing.JFrame {
             encontrado.cantidad = encontrado.cantidad + cant;
             precioUnd.setText(Double.toString(encontrado.precioC));
             total.setText(Double.toString(encontrado.precioC*cant));
+            // Registrar en lista de compras
+            Compra nueva = new Compra(encontrado, cant);
+            // Actualizar tabla del historial
+            if (historial != null) {
+                historial.actualizarTabla();
+            }
             JOptionPane.showMessageDialog(null, "Compra Registrada Correctamente.");
         } else {
             JOptionPane.showMessageDialog(null, "Producto No Encontrado. Intenta De Nuevo.");
         }
+        
         
     }//GEN-LAST:event_registrarActionPerformed
 

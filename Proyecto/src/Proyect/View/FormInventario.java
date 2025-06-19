@@ -6,6 +6,7 @@ package Proyect.View;
 
 import Proyect.Model.Producto;
 import Proyect.Model.Inventario;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -57,6 +58,7 @@ public class FormInventario extends javax.swing.JPanel {
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 4, true));
         jSeparator1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         BotonBuscar.setText("Buscar");
@@ -82,14 +84,14 @@ public class FormInventario extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Código", "Nombre", "Categoría", "Precio", "Cantidad"
+                "Código", "Nombre", "Categoría", "Precio", "Precio Compra", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -107,6 +109,7 @@ public class FormInventario extends javax.swing.JPanel {
             TablaProductos.getColumnModel().getColumn(2).setResizable(false);
             TablaProductos.getColumnModel().getColumn(3).setResizable(false);
             TablaProductos.getColumnModel().getColumn(4).setResizable(false);
+            TablaProductos.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -178,11 +181,45 @@ public class FormInventario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CampoBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoBusquedaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_CampoBusquedaActionPerformed
 
     private void BotonOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonOrdenarActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Producto> productosSorted = new ArrayList<>(Inventario.productos);
+        String criterio = (String) ListaDeFiltros.getSelectedItem();
+        
+        switch (criterio) {
+            case "Código":
+                productosSorted.sort((a, b) -> Integer.compare(a.getCodigo(), b.getCodigo()));
+                break;
+            case "Nombre":
+                productosSorted.sort((a, b) -> a.nombre.compareToIgnoreCase(b.nombre));
+                break;
+            case "Categoría":
+                productosSorted.sort((a, b) -> a.categoria.compareToIgnoreCase(b.categoria));
+                break;
+            case "Precio":
+                productosSorted.sort((a, b) -> Double.compare(a.precio, b.precio));
+                break;
+            case "Cantidad":
+                productosSorted.sort((a, b) -> Integer.compare(a.cantidad, b.cantidad));
+                break;
+            default:
+                break;
+        }
+        
+        DefaultTableModel modelo = (DefaultTableModel) TablaProductos.getModel();
+        modelo.setRowCount(0); // Limpia la tabla
+        for (Producto p : productosSorted) {
+            modelo.addRow(new Object[]{
+                p.getCodigo(),
+                p.nombre,
+                p.categoria,
+                p.precio,
+                p.precioC,
+                p.cantidad
+            });
+        }
     }//GEN-LAST:event_BotonOrdenarActionPerformed
 
     private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed

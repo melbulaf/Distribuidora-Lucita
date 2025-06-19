@@ -48,4 +48,21 @@ public class Producto {
     public int getCodigo(){
         return this.codigo;
     }
+    
+    public String getNombre() {
+        return nombre;
+}
+
+    public int getCantidad() {
+        return cantidad;
+}
+
+    public void reducirCantidad(int cantidadVendida) {
+        if (cantidadVendida <= cantidad) {
+            cantidad -= cantidadVendida;
+    }
+}
+    
+    
+    
 }

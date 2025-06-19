@@ -4,14 +4,16 @@ package Proyect.Model;
  * @author juan
  */
 public class RegistrarPedido {
+    
     private Producto producto;
     private int cantidadVendida;
-    private String fecha;
     private Cliente cliente;
-
-    public RegistrarPedido(Producto producto, int cantidadVendida, String fecha) {
+    private String fecha;
+    
+    public RegistrarPedido(Producto producto, int cantidadVendida, Cliente cliente, String fecha) {
         this.producto = producto;
         this.cantidadVendida = cantidadVendida;
+        this.cliente = cliente;
         this.fecha = fecha;
     }
 
@@ -30,5 +32,6 @@ public class RegistrarPedido {
     public Cliente getcliente() {
         return cliente;
     }
-
+    
+    
 }

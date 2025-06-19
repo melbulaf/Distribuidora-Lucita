@@ -3,21 +3,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Proyect.View;
+import Proyect.Model.Inventario;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
+import Proyect.Model.Cliente;
+import Proyect.Model.Producto;
+import Proyect.Model.Pedido;
+import Proyect.Model.MisDatosDeEjemplo;
+
 
 /**
  *
  * @author pc
  */
-public class FormRegistrarProducto extends javax.swing.JFrame {
+public class FormRegistrarPedido extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormRegistrarProducto.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormRegistrarPedido.class.getName());
 
     /**
      * Creates new form FormRegistrarProducto
      */
-    public FormRegistrarProducto() {
+    private Inventario inventario;
+
+    public FormRegistrarPedido() {
         initComponents();
-    }
+        inventario = new Inventario(); // instanciación correcta
+        
+}
+
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,6 +55,12 @@ public class FormRegistrarProducto extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,11 +94,10 @@ public class FormRegistrarProducto extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField2)
@@ -105,11 +126,11 @@ public class FormRegistrarProducto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -122,7 +143,17 @@ public class FormRegistrarProducto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String nombreProducto = jTextField1.getText();
+        int cantidad = Integer.parseInt(jTextField2.getText());
+        String fecha = jTextField2.getText();
+        inventario.registrarProducto(nombreProducto, cantidad, fecha);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,7 +177,7 @@ public class FormRegistrarProducto extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FormRegistrarProducto().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FormRegistrarPedido().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

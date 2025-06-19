@@ -18,4 +18,12 @@ public class Cliente {
         this.nombre = nombre;
         this.pedidos = pedidos;
     }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
 }

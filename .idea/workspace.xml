@@ -5,17 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7696dcee-ce98-4234-8950-3421b1b418d1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Controler/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Model/Inventario.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Model/Inventario.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Model/Producto.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/Model/Producto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/nbproject/private/private.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/Controler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/Controler/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/View/FormRegistrarProducto$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/View/FormRegistrarProducto$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/View/FormRegistrarProducto$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/View/FormRegistrarProducto$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/View/FormRegistrarProducto.class" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/View/FormRegistrarProducto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/View/FormRegistrarProducto.form" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/build/classes/Proyect/View/FormRegistrarProducto.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/nbproject/private/private.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/Model/Inventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/Model/Inventario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/Model/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/Model/Producto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/View/Inicio.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/View/Inicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/View/Inicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/View/FormRegistrarProducto.form" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/View/FormRegistrarProducto.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto/src/Proyect/View/FormRegistrarProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto/src/Proyect/View/FormRegistrarProducto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,16 +40,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pc/Documents/Distribuidora-Lucita&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/pc/Documents/Distribuidora-Lucita"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Distribuidora-Lucita" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Distribuidora-Lucita" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="7696dcee-ce98-4234-8950-3421b1b418d1" name="Changes" comment="" />

@@ -152,7 +152,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        InventarioMenuItem.setMnemonic('o');
         InventarioMenuItem.setText("Inventario");
         InventarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +160,6 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(InventarioMenuItem);
 
-        salirMenuItem.setMnemonic('x');
         salirMenuItem.setText("Salir");
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +176,7 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(Compras);
 
-        jMenuItem1.setText("Registrar productos");
+        jMenuItem1.setText("Registrar pedido");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -188,35 +186,27 @@ public class Inicio extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
         editMenu.setText("Edit");
 
-        cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Cut");
         editMenu.add(cutMenuItem);
 
-        copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Copy");
         editMenu.add(copyMenuItem);
 
-        pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Paste");
         editMenu.add(pasteMenuItem);
 
-        deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Delete");
         editMenu.add(deleteMenuItem);
 
         menuBar.add(editMenu);
 
-        helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
 
-        contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Contents");
         helpMenu.add(contentMenuItem);
 
-        aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("About");
         helpMenu.add(aboutMenuItem);
 
@@ -257,7 +247,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_ComprasActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        FormRegistrarProducto c = new FormRegistrarProducto();
+        FormRegistrarPedido c = new FormRegistrarPedido();
         c.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

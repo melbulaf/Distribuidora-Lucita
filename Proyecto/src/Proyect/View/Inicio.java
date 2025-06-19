@@ -95,6 +95,7 @@ public class Inicio extends javax.swing.JFrame {
         InventarioMenuItem = new javax.swing.JMenuItem();
         salirMenuItem = new javax.swing.JMenuItem();
         Compras = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
@@ -177,6 +178,14 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(Compras);
 
+        jMenuItem1.setText("Registrar productos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem1);
+
         menuBar.add(fileMenu);
 
         editMenu.setMnemonic('e');
@@ -247,6 +256,11 @@ public class Inicio extends javax.swing.JFrame {
         jifFormHCompras.setVisible(true);
     }//GEN-LAST:event_ComprasActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FormRegistrarProducto c = new FormRegistrarProducto();
+        c.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -261,6 +275,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JInternalFrame jifFormHCompras;
     private javax.swing.JInternalFrame jifFormInventario;
     private javax.swing.JMenuBar menuBar;

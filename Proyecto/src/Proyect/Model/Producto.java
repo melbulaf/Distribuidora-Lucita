@@ -63,6 +63,18 @@ public class Producto {
     }
 }
     
+    public String getCategoria() {
+        return categoria;
+}
+
+    public double getPrecio() {
+       return precio;
+}
+
+    public double getPrecioC() {
+        return precioC;
+}
+
     
     
 }

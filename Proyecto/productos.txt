@@ -1,0 +1,9 @@
+sugdbf,Item 1,0,12.0
+asd,Item 1,0,123.0
+asd,Item 1,0,1312.0
+asd,Item 1,0,1312.0
+asd,Item 1,0,1312.0
+qwe,Item 1,12,122.0
+qwer,Item 2,123,12000.0
+aaa,Item 3,234,34.0
+qwe,Item 1,123,123.0

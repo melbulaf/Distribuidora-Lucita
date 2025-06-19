@@ -14,6 +14,7 @@ import Proyect.Model.MisDatosDeEjemplo;
 import Proyect.View.FormInventario;
 import Proyect.View.FormRutas;
 import Proyect.View.FormHistoriaCompra;
+import Proyect.View.FormProducto;
 import Proyect.Model.Ruta;
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
 
+    
     // === CONSTRUCTOR ===
     public Inicio() {
         initComponents(); // NetBeans GUI
@@ -96,6 +98,7 @@ public class Inicio extends javax.swing.JFrame {
         salirMenuItem = new javax.swing.JMenuItem();
         Compras = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        menuItemNuevoProducto = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
@@ -152,6 +155,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        InventarioMenuItem.setMnemonic('o');
         InventarioMenuItem.setText("Inventario");
         InventarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +164,7 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(InventarioMenuItem);
 
+        salirMenuItem.setMnemonic('x');
         salirMenuItem.setText("Salir");
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,29 +189,45 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(jMenuItem1);
 
+        menuItemNuevoProducto.setText("Nuevo producto");
+        menuItemNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemNuevoProductoActionPerformed(evt);
+            }
+        });
+        fileMenu.add(menuItemNuevoProducto);
+
         menuBar.add(fileMenu);
 
+        editMenu.setMnemonic('e');
         editMenu.setText("Edit");
 
+        cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Cut");
         editMenu.add(cutMenuItem);
 
+        copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Copy");
         editMenu.add(copyMenuItem);
 
+        pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Paste");
         editMenu.add(pasteMenuItem);
 
+        deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Delete");
         editMenu.add(deleteMenuItem);
 
         menuBar.add(editMenu);
 
+        helpMenu.setMnemonic('h');
         helpMenu.setText("Help");
 
+        contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Contents");
         helpMenu.add(contentMenuItem);
 
+        aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("About");
         helpMenu.add(aboutMenuItem);
 
@@ -251,6 +272,11 @@ public class Inicio extends javax.swing.JFrame {
         c.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void menuItemNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNuevoProductoActionPerformed
+         FormProducto nuevoProducto = new FormProducto();
+    nuevoProducto.setVisible(true);
+    }//GEN-LAST:event_menuItemNuevoProductoActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -269,6 +295,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jifFormHCompras;
     private javax.swing.JInternalFrame jifFormInventario;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem menuItemNuevoProducto;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem salirMenuItem;
     // End of variables declaration//GEN-END:variables

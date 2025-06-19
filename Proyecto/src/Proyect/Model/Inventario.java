@@ -13,6 +13,7 @@ public class Inventario {
     
     public static ArrayList<Producto> productos;
     public static Inventario instancia;
+    private ArrayList<RegistrarPedido> registrarPedidos = new ArrayList<>();
     
     public Inventario() {
         productos = new ArrayList<>();
@@ -31,5 +32,5 @@ public class Inventario {
     
     public void agregarProducto(Producto producto) {
         productos.add(producto);
-    }     
-}
+    }
+}        

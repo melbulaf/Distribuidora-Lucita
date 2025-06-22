@@ -1,6 +1,9 @@
 package Proyect.Model;
 
 import java.util.ArrayList;
+import Proyect.Model.Producto;
+import Proyect.Model.Inventario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -9,20 +12,20 @@ import java.util.ArrayList;
 
 public class RegistrarPedido {
     
-    private String  producto;
+    private Producto  producto;
     private int cantidadVendida;
     private String NombreCliente;
     private String fecha;
     static ArrayList<RegistrarPedido> listaDePedidos = new ArrayList<>();
     
-    public RegistrarPedido(String producto, int cantidadVendida, String cliente, String fecha) {
+    public RegistrarPedido(Producto producto, int cantidadVendida, String cliente, String fecha) {
         this.producto = producto;
         this.cantidadVendida = cantidadVendida;
         this.NombreCliente = cliente;
         this.fecha = fecha;
     }
 
-    public String getProducto() {
+    public Producto getProducto() {
         return producto;
     }
 
@@ -38,19 +41,33 @@ public class RegistrarPedido {
         return NombreCliente;
     }
     
-    public static void pedidoRegistrado(String nombreProducto, int cantidadVendida, String nombreCliente, String fecha){
-        
-        RegistrarPedido pedido = new RegistrarPedido(nombreProducto,cantidadVendida, nombreCliente, fecha);
-        listaDePedidos.add(pedido);
-        System.out.println(listaDePedidos);
+    public static boolean pedidoRegistrado(String nombreProducto, int cantidadVendida, String nombreCliente, String fecha) {
+    ArrayList<Producto> productos = Inventario.instancia.obtenerProductos();
+
+    for (Producto producto : productos) {
+        if (producto.getNombre().equalsIgnoreCase(nombreProducto)) {
+            if (producto.getCantidad() > cantidadVendida) {
+                // Crear pedido
+                RegistrarPedido nuevoPedido = new RegistrarPedido(producto, cantidadVendida, nombreCliente, fecha);
+                listaDePedidos.add(nuevoPedido);
+
+                // Actualizar cantidad disponible en inventario
+                producto.setCantidad(producto.getCantidad() - cantidadVendida);
+
+                System.out.println("Pedido registrado exitosamente:");
+                return true;
+            } else {
+                System.out.println("Error: No hay suficiente stock para el producto: " + producto.getNombre());
+                JOptionPane.showMessageDialog(null, "cantidad insuficiente");
+                    return false;
+            }
+        }
     }
-    
-    public static void pedidoNoRegistradoPorStock(Producto producto, int cantidadVendida, String nombreCliente, String fecha){
-    }
-    
-    public static void pedidoNoRegistradoPorFaltaDeDatos(Producto producto, int cantidadVendida, String nombreCliente, String fecha){
-    }
+
+    System.out.println("Error: Producto no encontrado: " + nombreProducto);
+    JOptionPane.showMessageDialog(null, "Producto no encontrado");
+        return false;
     
     
-    
+}
 }

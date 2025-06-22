@@ -33,4 +33,7 @@ public class Inventario {
     public void agregarProducto(Producto producto) {
         productos.add(producto);
     }
+    
+    
+   
 }        

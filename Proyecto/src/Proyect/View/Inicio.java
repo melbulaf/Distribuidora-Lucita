@@ -71,10 +71,21 @@ public class Inicio extends javax.swing.JFrame {
     fileMenu.add(menuItemRutaDelDia);
     menuItemRutaDelDia.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jifFormRutas.setVisible(true);
-            try {
-                jifFormRutas.setSelected(true);
-            } catch (java.beans.PropertyVetoException e) {}
+            if (jifFormRutas == null || jifFormRutas.isClosed()) {
+                ArrayList<Ruta> rutas = MisDatosDeEjemplo.crearRutas();
+                objFormRutas = new FormRutas(rutas);
+                jifFormRutas = new javax.swing.JInternalFrame("Ruta del Día", true, true, true, true);
+                jifFormRutas.setContentPane(objFormRutas);
+                jifFormRutas.setSize(700, 500);
+                desktopPane.add(jifFormRutas);
+                jifFormRutas.setVisible(true);
+            } else {
+                jifFormRutas.setVisible(true);
+                jifFormRutas.toFront();
+                try {
+                    jifFormRutas.setSelected(true);
+                } catch (java.beans.PropertyVetoException ex) {}
+            }
         }
     });
 }
@@ -256,7 +267,20 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_salirMenuItemActionPerformed
 
     private void InventarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InventarioMenuItemActionPerformed
-        jifFormInventario.setVisible(true);
+        if (jifFormInventario == null || jifFormInventario.isClosed()) {
+            objFormInventario = new FormInventario();
+            jifFormInventario = new javax.swing.JInternalFrame("Inventario", true, true, true, true);
+            jifFormInventario.setContentPane(objFormInventario);
+            jifFormInventario.setSize(700, 500);
+            desktopPane.add(jifFormInventario);
+            jifFormInventario.setVisible(true);
+        } else {
+            jifFormInventario.setVisible(true);
+            jifFormInventario.toFront();
+            try {
+                jifFormInventario.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {}
+        }
     }//GEN-LAST:event_InventarioMenuItemActionPerformed
 
     private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
@@ -264,7 +288,20 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_fileMenuActionPerformed
 
     private void ComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprasActionPerformed
-        jifFormHCompras.setVisible(true);
+        if (jifFormHCompras == null || jifFormHCompras.isClosed()) {
+            objFormHCompras = new FormHistoriaCompra();
+            jifFormHCompras = new javax.swing.JInternalFrame("Historial de Compras", true, true, true, true);
+            jifFormHCompras.setContentPane(objFormHCompras);
+            jifFormHCompras.setSize(700, 500);
+            desktopPane.add(jifFormHCompras);
+            jifFormHCompras.setVisible(true);
+        } else {
+            jifFormHCompras.setVisible(true);
+            jifFormHCompras.toFront();
+            try {
+                jifFormHCompras.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {}
+        }
     }//GEN-LAST:event_ComprasActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

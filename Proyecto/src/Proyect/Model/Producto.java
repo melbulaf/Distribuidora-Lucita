@@ -74,6 +74,12 @@ public class Producto {
     public double getPrecioC() {
         return precioC;
 }
+    
+    public void setCantidad(int nuevaCantidad) {
+        this.cantidad = nuevaCantidad;
+}
+    
+    
 
     
     

@@ -195,6 +195,7 @@ public class FormCompra extends javax.swing.JFrame {
             if (historial != null) {
                 historial.actualizarTabla();
             }
+            Compra.guardarC();
             JOptionPane.showMessageDialog(null, "Compra Registrada Correctamente.");
         } else {
             JOptionPane.showMessageDialog(null, "Producto No Encontrado. Intenta De Nuevo.");

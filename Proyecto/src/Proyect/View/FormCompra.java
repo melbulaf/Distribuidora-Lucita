@@ -165,42 +165,46 @@ public class FormCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_codigoNombreActionPerformed
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        String nombreCodigo = codigoNombre.getText();
-        int cant = Integer.parseInt(cantidad.getText());
-        Producto encontrado = null;
-        try {
-            int codigoBuscado = Integer.parseInt(nombreCodigo); // evaluar si es código
-            for (Producto p : Inventario.productos) {
-                if (p.getCodigo() == codigoBuscado) {
-                    encontrado = p;
-                    break;
+        if (codigoNombre.getText().isEmpty() || cantidad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor llena todos los campos.", "Campos Incompletos", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            String nombreCodigo = codigoNombre.getText();
+            int cant = Integer.parseInt(cantidad.getText());
+            Producto encontrado = null;
+            try {
+                int codigoBuscado = Integer.parseInt(nombreCodigo); // evaluar si es código
+                for (Producto p : Inventario.productos) {
+                    if (p.getCodigo() == codigoBuscado) {
+                        encontrado = p;
+                        break;
+                    }
+                }
+            } catch (NumberFormatException e) { // si no es número, buscar por nombre
+                for (Producto p : Inventario.productos) {
+                    if (p.nombre.equalsIgnoreCase(nombreCodigo)) {
+                        encontrado = p;
+                        break;
+                    }
                 }
             }
-        } catch (NumberFormatException e) { // si no es número, buscar por nombre
-            for (Producto p : Inventario.productos) {
-                if (p.nombre.equalsIgnoreCase(nombreCodigo)) {
-                    encontrado = p;
-                    break;
+
+            if (encontrado != null){
+                encontrado.cantidad = encontrado.cantidad + cant;
+                precioUnd.setText(Double.toString(encontrado.precioC));
+                total.setText(Double.toString(encontrado.precioC*cant));
+                // Registrar en lista de compras
+                Compra nueva = new Compra(encontrado, cant);
+                // Actualizar tabla del historial
+                if (historial != null) {
+                    historial.actualizarTabla();
                 }
+                Compra.guardarC();
+                JOptionPane.showMessageDialog(null, "Compra Registrada Correctamente.", "Registrado", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Producto No Encontrado. Comprueba el Catalogo o\nregistra un producto nuevo.", "No Encontrado", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
-        if (encontrado != null){
-            encontrado.cantidad = encontrado.cantidad + cant;
-            precioUnd.setText(Double.toString(encontrado.precioC));
-            total.setText(Double.toString(encontrado.precioC*cant));
-            // Registrar en lista de compras
-            Compra nueva = new Compra(encontrado, cant);
-            // Actualizar tabla del historial
-            if (historial != null) {
-                historial.actualizarTabla();
-            }
-            Compra.guardarC();
-            JOptionPane.showMessageDialog(null, "Compra Registrada Correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Producto No Encontrado. Intenta De Nuevo.");
-        }
-        
         
     }//GEN-LAST:event_registrarActionPerformed
 

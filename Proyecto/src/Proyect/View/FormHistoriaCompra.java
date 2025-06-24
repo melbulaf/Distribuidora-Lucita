@@ -7,6 +7,7 @@ package Proyect.View;
 import Proyect.Model.Inventario;
 import Proyect.Model.Producto;
 import Proyect.Model.Compra;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +32,7 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
                     p.producto.nombre,
                     p.cantidad,
                     p.producto.precioC,
+                    p.fecha,
                     p.total
                 });
             }
@@ -45,24 +47,32 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cantidad = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaHistorial = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         agregarCompra = new javax.swing.JButton();
+        fecha = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        codigoNombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        botonFiltrar = new javax.swing.JButton();
+        botonLimpiar = new javax.swing.JButton();
 
         TablaHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre", "Cantidad", "Precio", "Total"
+                "Codigo", "Nombre", "Cantidad", "Precio", "Fecha", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -81,6 +91,32 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setText("Filtros:");
+
+        jLabel3.setText("Fecha");
+
+        codigoNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigoNombreActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Producto");
+
+        botonFiltrar.setText("Filtrar");
+        botonFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonFiltrarActionPerformed(evt);
+            }
+        });
+
+        botonLimpiar.setText("Limpiar Filtros");
+        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,11 +124,27 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(agregarCompra)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(agregarCompra))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botonFiltrar)
+                                .addGap(29, 29, 29)
+                                .addComponent(botonLimpiar)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -102,9 +154,23 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(agregarCompra)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(agregarCompra)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonFiltrar)
+                    .addComponent(botonLimpiar))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -113,6 +179,94 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
         formCompra.setSize(460,360);
         formCompra.setVisible(true);
     }//GEN-LAST:event_agregarCompraActionPerformed
+
+    private void codigoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigoNombreActionPerformed
+
+    private void botonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonFiltrarActionPerformed
+        String NombreCodigo = codigoNombre.getText().trim().toLowerCase();
+        java.util.Date fechaSeleccionada = fecha.getDate(); // null si no se elige
+        String fechaFormateada = null;
+
+        if (fechaSeleccionada != null) {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            fechaFormateada = sdf.format(fechaSeleccionada);
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) TablaHistorial.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+        boolean seEncontraronCoincidencias = false;
+
+        if (!NombreCodigo.isEmpty()) {
+            try {
+                int codigoBuscado = Integer.parseInt(NombreCodigo);
+                for (int i = Compra.compras.size() - 1; i >= 0; i--) {
+                    Compra c = Compra.compras.get(i);
+                    if (c.producto.getCodigo() == codigoBuscado &&
+                        (fechaFormateada == null || c.fecha.equals(fechaFormateada))) {
+                        modelo.addRow(new Object[]{
+                            c.producto.getCodigo(),
+                            c.producto.nombre,
+                            c.cantidad,
+                            c.producto.precioC,
+                            c.fecha,
+                            c.total
+                        });
+                        seEncontraronCoincidencias = true;
+                    }
+                }
+            } catch (NumberFormatException e) {
+                for (int i = Compra.compras.size() - 1; i >= 0; i--) {
+                    Compra c = Compra.compras.get(i);
+                    if (c.producto.nombre.toLowerCase().contains(NombreCodigo) &&
+                        (fechaFormateada == null || c.fecha.equals(fechaFormateada))) {
+                        modelo.addRow(new Object[]{
+                            c.producto.getCodigo(),
+                            c.producto.nombre,
+                            c.cantidad,
+                            c.producto.precioC,
+                            c.fecha,
+                            c.total
+                        });
+                        seEncontraronCoincidencias = true;
+                    }
+                }
+            }
+        } else if (fechaFormateada != null) {
+            // Buscar solo por fecha
+            for (int i = Compra.compras.size() - 1; i >= 0; i--) {
+                Compra c = Compra.compras.get(i);
+                if (c.fecha.equals(fechaFormateada)) {
+                    modelo.addRow(new Object[]{
+                        c.producto.getCodigo(),
+                        c.producto.nombre,
+                        c.cantidad,
+                        c.producto.precioC,
+                        c.fecha,
+                        c.total
+                    });
+                    seEncontraronCoincidencias = true;
+                }
+            }
+        }
+
+        if (!seEncontraronCoincidencias) {
+            JOptionPane.showMessageDialog(null,
+                "Producto No Encontrado. Verifica el nombre, código o fecha.",
+                "No Encontrado",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botonFiltrarActionPerformed
+
+    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
+        codigoNombre.setText("");
+        fecha.setDate(null);
+        actualizarTabla();
+    }//GEN-LAST:event_botonLimpiarActionPerformed
     
     public void actualizarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) TablaHistorial.getModel();
@@ -124,6 +278,7 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
                 p.producto.nombre,
                 p.cantidad,
                 p.producto.precioC,
+                p.fecha,
                 p.total
             });
         }
@@ -132,7 +287,15 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaHistorial;
     private javax.swing.JButton agregarCompra;
+    private javax.swing.JButton botonFiltrar;
+    private javax.swing.JButton botonLimpiar;
+    private javax.swing.JTextField cantidad;
+    private javax.swing.JTextField codigoNombre;
+    private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

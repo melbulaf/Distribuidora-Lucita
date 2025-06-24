@@ -56,6 +56,10 @@ public class FormRutas extends javax.swing.JPanel {
     // Lista auxiliar para vincular filas y objetos pedido
     private ArrayList<RegistrarPedido> pedidosMostrados = new ArrayList<>();
 
+    // Panel especial para mostrar el mensaje de que no hay entregas
+    private JPanel panelSinPedidos;
+    private JLabel lblSinPedidos;
+
     public FormRutas(ArrayList<Ruta> rutas) {
         this.rutas = rutas;
         setBackground(azulFondo);
@@ -126,7 +130,7 @@ public class FormRutas extends javax.swing.JPanel {
         tablaPedidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tablaPedidos.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                if (evt.getClickCount() == 1 && tablaPedidos.getSelectedRow() >= 0) {
+                if (evt.getClickCount() == 1 && tablaPedidos.getSelectedRow() >= 0 && tablaPedidos.isEnabled()) {
                     mostrarDetallePedido(tablaPedidos.getSelectedRow());
                 }
             }
@@ -168,6 +172,14 @@ public class FormRutas extends javax.swing.JPanel {
         JScrollPane scrollTabla = new JScrollPane(tablaPedidos);
         scrollTabla.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
         scrollTabla.getViewport().setBackground(blanco);
+
+        // Panel para mensaje de NO entregas
+        panelSinPedidos = new JPanel(new GridBagLayout());
+        panelSinPedidos.setBackground(blanco);
+        lblSinPedidos = new JLabel("No hay entregas asignadas para hoy");
+        lblSinPedidos.setFont(fuenteTitulo.deriveFont(Font.PLAIN, 22f));
+        lblSinPedidos.setForeground(azulPrincipal);
+        panelSinPedidos.add(lblSinPedidos);
 
         panelDetalle = new JPanel();
         panelDetalle.setBackground(blanco);
@@ -233,6 +245,7 @@ public class FormRutas extends javax.swing.JPanel {
         panelDetalle.add(btnAtras);
 
         panelDerecho.add(scrollTabla, "tabla");
+        panelDerecho.add(panelSinPedidos, "no_pedidos");
         panelDerecho.add(panelDetalle, "detalle");
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelImagen, panelDerecho);
@@ -271,7 +284,6 @@ public class FormRutas extends javax.swing.JPanel {
             mostrarImagenDelDia();
 
             cargarPedidos();
-            cardLayout.show(panelDerecho, "tabla");
         } else {
             panelImagen.setVisible(false);
             panelDerecho.setVisible(false);
@@ -300,11 +312,11 @@ public class FormRutas extends javax.swing.JPanel {
         }
 
         if (filas == 0) {
-            modeloPedidos.addRow(new Object[]{"No hay pedidos para esta ruta hoy", ""});
-            pedidosMostrados.add(null);
-            tablaPedidos.setEnabled(false);
+            // No hay pedidos asignados para hoy
+            cardLayout.show(panelDerecho, "no_pedidos");
         } else {
             tablaPedidos.setEnabled(true);
+            cardLayout.show(panelDerecho, "tabla");
         }
     }
 

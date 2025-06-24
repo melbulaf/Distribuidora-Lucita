@@ -92,6 +92,9 @@ public class Ruta {
                 break;
             }
         }
+        // NO crear ejemplos si hoy es martes
+        if (indiceHoy == 1) return; // 1 es Martes
+
         if (indiceHoy == -1) return; // Hoy no hay ruta de ejemplo
 
         // Crea productos de ejemplo en inventario si no existen

@@ -34,7 +34,8 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
        String ids [] ={"Nombre del producto", "Cantidad", "Cliente", "Fecha"};
        mt.setColumnIdentifiers(ids);
        jTable1.setModel(mt);
-       this.inventario = inventario; // usa el inventario ya existente                              
+       this.inventario = inventario; // usa el inventario ya existente    
+       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 }
 
     /**
@@ -90,6 +91,26 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},

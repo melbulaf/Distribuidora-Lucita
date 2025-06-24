@@ -180,6 +180,7 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
         String cliente = client.getText();
         java.util.Date fechaSeleccionada = fech.getDate(); // null si no se elige
         String fecha = null;
+        
 
         if (fechaSeleccionada != null) {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
@@ -191,15 +192,16 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
             return;
         }
         
-        int cantidad = Integer.parseInt(cantidadStr); // conversión segura
+        int cantidad = Integer.parseInt(cantidadStr.trim()); // ✅ más seguro
+
         
         boolean exito = RegistrarPedido.pedidoRegistrado(nombreProducto, cantidad, cliente, fecha);
         if (exito) {
             mt.addRow(new Object[]{nombreProducto, cantidad, cliente, fecha});
             
-            Produc.setText(" ");
-            cant.setText(" ");
-            client.setText(" ");
+            Produc.setText("");
+            cant.setText("");
+            client.setText("");
         }
         
         

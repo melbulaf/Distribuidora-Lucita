@@ -177,7 +177,13 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
         String nombreProducto = Produc.getText();
         String cantidadStr = cant.getText();
         String cliente = client.getText();
-        String fecha = fech.getDate().toString();
+        java.util.Date fechaSeleccionada = fech.getDate(); // null si no se elige
+        String fecha = null;
+
+        if (fechaSeleccionada != null) {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            fecha = sdf.format(fechaSeleccionada);
+        }
 
         if (nombreProducto.trim().isEmpty() || cantidadStr.trim().isEmpty() || cliente.trim().isEmpty() || fecha.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos");

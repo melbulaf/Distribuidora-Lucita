@@ -10,7 +10,6 @@ import Proyect.Model.Cliente;
 import Proyect.Model.Producto;
 import Proyect.Model.RegistrarPedido;
 import javax.swing.table.DefaultTableModel;
-import com.toedter.calendar.JDateChooser;
 
 
 /**

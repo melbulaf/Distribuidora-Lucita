@@ -23,6 +23,7 @@ public class Inicio extends javax.swing.JFrame {
     // === VARIABLES GLOBALES ===
     private FormInventario objFormInventario;
     private FormHistoriaCompra objFormHCompras;
+    private FormProducto objFormNProducto;
     private javax.swing.JMenuItem menuItemRutaDelDia;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
@@ -41,6 +42,10 @@ public class Inicio extends javax.swing.JFrame {
     private void inicializarFormularios() {
         // Inventario
         
+        jifFormInventario.setClosable(true);
+        jifFormInventario.setIconifiable(true);
+        jifFormInventario.setMaximizable(true);
+        jifFormInventario.setResizable(true);
         objFormInventario = new FormInventario();
         jifFormInventario.setContentPane(objFormInventario);
         objFormInventario.setSize(700,500);
@@ -59,11 +64,25 @@ public class Inicio extends javax.swing.JFrame {
         jifFormRutas.setBounds(10, 10, 700, 500);
         
         // Compras
+        jifFormHCompras.setClosable(true);
+        jifFormHCompras.setIconifiable(true);
+        jifFormHCompras.setMaximizable(true);
+        jifFormHCompras.setResizable(true);
         objFormHCompras = new FormHistoriaCompra();
         jifFormHCompras.setContentPane(objFormHCompras);
         objFormHCompras.setSize(700,500);
         jifFormHCompras.setSize(700,500);
         jifFormHCompras.setVisible(false);
+        
+        //Nuevo Producto
+        jifFormNProducto.setClosable(true);
+        jifFormNProducto.setIconifiable(true);
+        jifFormNProducto.setMaximizable(true);
+        jifFormNProducto.setResizable(true);
+        objFormNProducto = new FormProducto();
+        jifFormNProducto.setContentPane(objFormNProducto);
+        jifFormNProducto.setSize(700,500);
+        jifFormNProducto.setVisible(false);
         
     }
 
@@ -105,6 +124,7 @@ public class Inicio extends javax.swing.JFrame {
         desktopPane = new javax.swing.JDesktopPane();
         jifFormInventario = new javax.swing.JInternalFrame();
         jifFormHCompras = new javax.swing.JInternalFrame();
+        jifFormNProducto = new javax.swing.JInternalFrame();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         InventarioMenuItem = new javax.swing.JMenuItem();
@@ -159,7 +179,23 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         desktopPane.add(jifFormHCompras);
-        jifFormHCompras.setBounds(-10, -10, 550, 530);
+        jifFormHCompras.setBounds(20, 0, 550, 530);
+
+        jifFormNProducto.setVisible(true);
+
+        javax.swing.GroupLayout jifFormNProductoLayout = new javax.swing.GroupLayout(jifFormNProducto.getContentPane());
+        jifFormNProducto.getContentPane().setLayout(jifFormNProductoLayout);
+        jifFormNProductoLayout.setHorizontalGroup(
+            jifFormNProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jifFormNProductoLayout.setVerticalGroup(
+            jifFormNProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        desktopPane.add(jifFormNProducto);
+        jifFormNProducto.setBounds(0, 0, 540, 500);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -321,8 +357,20 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void menuItemNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNuevoProductoActionPerformed
-         FormProducto nuevoProducto = new FormProducto();
-    nuevoProducto.setVisible(true);
+         if (jifFormNProducto == null || jifFormNProducto.isClosed()) {
+            objFormNProducto = new FormProducto();
+            jifFormNProducto = new javax.swing.JInternalFrame("Agregar Nuevo Producto", true, true, true, true);
+            jifFormNProducto.setContentPane(objFormNProducto);
+            jifFormNProducto.setSize(700, 500);
+            desktopPane.add(jifFormNProducto);
+            jifFormNProducto.setVisible(true);
+        } else {
+            jifFormNProducto.setVisible(true);
+            jifFormNProducto.toFront();
+            try {
+                jifFormNProducto.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {}
+        }
     }//GEN-LAST:event_menuItemNuevoProductoActionPerformed
 
     private void MEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEditarActionPerformed
@@ -348,6 +396,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JInternalFrame jifFormHCompras;
     private javax.swing.JInternalFrame jifFormInventario;
+    private javax.swing.JInternalFrame jifFormNProducto;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemNuevoProducto;
     private javax.swing.JMenuItem pasteMenuItem;

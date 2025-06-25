@@ -8,25 +8,15 @@
  *
  * @author Jorkman
  */
-package Proyect.Model;
 
-import java.util.ArrayList;
+package Proyect.Model;
 import javax.swing.JOptionPane;
 
-/**
- * Clase de utilidades para buscar, actualizar y eliminar Productos
- * en el Inventario.
- */
 public class Editar {
 
-    /**
-     * Busca un producto por código (String) o por nombre (ignora mayúsculas).
-     * @param entrada texto con el código o el nombre
-     * @return la instancia de Producto si la encuentra, o null si no
-     */
+    // Busca un producto según su código (como texto) o su nombre (ignorando mayúsculas)
     public static Producto buscarProducto(String entrada) {
         for (Producto p : Inventario.getInstancia().obtenerProductos()) {
-            // Compara con el código convertido a String o con el nombre
             if (String.valueOf(p.getCodigo()).equals(entrada)
              || p.nombre.equalsIgnoreCase(entrada)) {
                 return p;
@@ -35,58 +25,83 @@ public class Editar {
         return null;
     }
 
-    /**
-     * Actualiza uno de los campos del producto según el atributo elegido.
-     * Sólo actualiza uno a la vez, y persiste en el archivo de texto.
-     *
-     * @param p         producto a modificar
-     * @param atributo  nombre del atributo ("nombre", "cantidad", "precio de compra", "precio de venta")
-     * @param nuevoValor valor en texto que se convertirá al tipo adecuado
-     * @return true si la actualización fue exitosa, false en caso de error
-     */
+    // Actualiza un único atributo de un producto según el nombre del campo
+    // Valida los valores antes de aplicar los cambios y guarda los productos en el archivo
     public static boolean actualizarProducto(Producto p, String atributo, String nuevoValor) {
         try {
-            switch (atributo.toLowerCase()) {
+            switch (atributo.trim().toLowerCase()) {
                 case "nombre":
                     p.nombre = nuevoValor;
                     break;
+
                 case "cantidad":
-                    p.cantidad = Integer.parseInt(nuevoValor);
+                    int cantidad = Integer.parseInt(nuevoValor);
+                    if (cantidad <= 0) {
+                        JOptionPane.showMessageDialog(null,
+                            "La cantidad debe ser mayor que cero.",
+                            "Valor inválido", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                    p.cantidad = cantidad;
                     break;
+
+                case "categoría":
+                    if (!nuevoValor.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+                        JOptionPane.showMessageDialog(null,
+                            "La categoría debe contener solo letras (sin números ni símbolos).",
+                            "Categoría inválida", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                    p.categoria = nuevoValor;
+                    break;
+
                 case "precio de compra":
-                    p.precioC = Double.parseDouble(nuevoValor);
+                    double precioC = Double.parseDouble(nuevoValor);
+                    if (precioC <= 0) {
+                        JOptionPane.showMessageDialog(null,
+                            "El precio de compra debe ser mayor que cero.",
+                            "Valor inválido", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                    p.precioC = precioC;
                     break;
+
                 case "precio de venta":
-                    p.precio = Double.parseDouble(nuevoValor);
+                    double precioV = Double.parseDouble(nuevoValor);
+                    if (precioV <= 0) {
+                        JOptionPane.showMessageDialog(null,
+                            "El precio de venta debe ser mayor que cero.",
+                            "Valor inválido", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                    p.precio = precioV;
                     break;
+
                 default:
-                    // Atributo no reconocido
+                    System.out.println("Atributo no reconocido: '" + atributo + "'");
                     return false;
             }
-            // Guardar todos los productos en el archivo
+
+            // Guarda los cambios en el archivo de productos
             Producto.guardarProductos();
             return true;
+
         } catch (NumberFormatException ex) {
-            // Valor numérico inválido
             JOptionPane.showMessageDialog(null,
                 "Valor numérico inválido para " + atributo + ": " + nuevoValor,
                 "Error de formato", JOptionPane.ERROR_MESSAGE);
             return false;
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    /**
-     * Elimina un producto del inventario y persiste el cambio.
-     * @param p producto a eliminar
-     * @return true si se eliminó, false si no se encontró o no pudo eliminarse
-     */
+    // Elimina un producto del inventario y guarda los cambios en el archivo
     public static boolean eliminarProducto(Producto p) {
         boolean eliminado = Inventario.getInstancia().obtenerProductos().remove(p);
         if (eliminado) {
-            // Guardar tras eliminar
             Producto.guardarProductos();
         }
         return eliminado;

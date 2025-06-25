@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
+/**
+ *
+ * @author Jorkman
+ */
 package Proyect.Model;
 
 import java.io.*;

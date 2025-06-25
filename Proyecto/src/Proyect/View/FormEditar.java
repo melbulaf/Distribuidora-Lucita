@@ -254,6 +254,11 @@ public class FormEditar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,
                 "Se actualizó “" + atributo + "” correctamente."
             );
+            
+        //Si se cambió el nombre, usar el nuevo valor como búsqueda
+        if (atributo.equalsIgnoreCase("nombre")) {
+            CodigoNombre.setText(nuevoValor);
+        }
             jBuscarActionPerformed(null);    // refrescar tabla
             jTextNuevovalor.setText("");     // limpiar campo
         } else {

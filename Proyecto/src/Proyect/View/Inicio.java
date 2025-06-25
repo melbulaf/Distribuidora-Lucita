@@ -34,6 +34,7 @@ public class Inicio extends javax.swing.JFrame {
         Producto.cargarProductos();
         inicializarFormularios();
         inicializarMenuRutaDelDia();
+        
     }
 
     // === INICIALIZA TUS FORMULARIOS ===
@@ -111,6 +112,7 @@ public class Inicio extends javax.swing.JFrame {
         Compras = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         menuItemNuevoProducto = new javax.swing.JMenuItem();
+        MEditar = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
@@ -208,6 +210,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         fileMenu.add(menuItemNuevoProducto);
+
+        MEditar.setText("Editar");
+        MEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MEditarActionPerformed(evt);
+            }
+        });
+        fileMenu.add(MEditar);
 
         menuBar.add(fileMenu);
 
@@ -315,11 +325,17 @@ public class Inicio extends javax.swing.JFrame {
     nuevoProducto.setVisible(true);
     }//GEN-LAST:event_menuItemNuevoProductoActionPerformed
 
+    private void MEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEditarActionPerformed
+        FormEditar formMEditar = new FormEditar();
+        formMEditar.setVisible(true);
+    }//GEN-LAST:event_MEditarActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Compras;
     private javax.swing.JMenuItem InventarioMenuItem;
+    private javax.swing.JMenuItem MEditar;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;

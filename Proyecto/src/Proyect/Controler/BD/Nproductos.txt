@@ -10,12 +10,11 @@
 1009,Leche,General,4000.0,3500.0,20
 1010,Refrescos,General,2500.0,2000.0,15
 1011,Pan,General,1500.0,1000.0,12
-1012,Clavos,Ferretería,500.0,300.0,50
+1012,Clavos,Ferretería,100.0,300.0,50
 1013,Harina,Panadería,1200.0,1000.0,8
 1014,Huevos,Panadería,500.0,400.0,24
 1015,Helados,Heladería,3500.0,3000.0,30
 1016,Conos,Heladería,500.0,400.0,60
 1017,Arroz,Supermercado,2000.0,1500.0,10
 1018,Frijoles,Supermercado,1800.0,1400.0,7
-1019,Aceite,Supermercado,8000.0,7000.0,4
-1020,Pan de Guayaba,Galletas,7000.0,5000.0,6
+1019,Pan de Guayaba,Galletas,7000.0,5000.0,6

@@ -19,9 +19,7 @@ import java.util.Arrays;
 
 public class MisDatosDeEjemplo {
 
-    public static ArrayList<Ruta> crearRutas() throws ClassNotFoundException {
-        Class.forName("Proyect.Model.Producto"); //Objeto de ejemplo para inicializar la clase producto
-                                                   //Y que se carguen los objetos.
+    public static ArrayList<Ruta> crearRutas() {
         ArrayList<Ruta> rutas = new ArrayList<>();
 
         // --- RUTA LUNES ---

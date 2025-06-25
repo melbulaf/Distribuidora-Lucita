@@ -11,6 +11,7 @@ package Proyect.View;
 
 
 import Proyect.Model.MisDatosDeEjemplo;
+import static Proyect.Model.Producto.cargarProductos;
 import Proyect.View.FormInventario;
 import Proyect.View.FormRutas;
 import Proyect.View.FormHistoriaCompra;
@@ -30,6 +31,7 @@ public class Inicio extends javax.swing.JFrame {
     // === CONSTRUCTOR ===
     public Inicio() {
         initComponents(); // NetBeans GUI
+        cargarProductos();
         inicializarFormularios();
         inicializarMenuRutaDelDia();
     }

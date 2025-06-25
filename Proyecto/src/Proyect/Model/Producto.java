@@ -23,12 +23,6 @@ public class Producto {
     public double precioC;  // Precio de compra
     public int cantidad;
 
-    // Bloque estático: se ejecuta cuando la clase se carga
-    // Carga los productos desde el archivo y los asigna al inventario
-    static {
-        cargarProductos();
-    }
-
     // Constructor para crear productos nuevos desde la interfaz (sin cantidad inicial)
     public Producto(String nombre, String categoria, double precio, double precioC) {
         this.codigo = contador++; // Asigna código único

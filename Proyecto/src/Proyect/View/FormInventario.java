@@ -253,6 +253,7 @@ public class FormInventario extends javax.swing.JPanel {
                 encontrado.nombre,
                 encontrado.categoria,
                 encontrado.precio,
+                encontrado.precioC,
                 encontrado.cantidad
             });
         } else {

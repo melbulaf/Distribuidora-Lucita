@@ -52,13 +52,13 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
         TablaHistorial = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         agregarCompra = new javax.swing.JButton();
-        fecha = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         codigoNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         botonFiltrar = new javax.swing.JButton();
         botonLimpiar = new javax.swing.JButton();
+        fecha = new com.toedter.calendar.JDateChooser();
 
         TablaHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,8 +133,8 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(53, 53, 53)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(codigoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
@@ -164,13 +164,13 @@ public class FormHistoriaCompra extends javax.swing.JPanel {
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel4))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGap(18, 18, 18)
                             .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonFiltrar)
                     .addComponent(botonLimpiar))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

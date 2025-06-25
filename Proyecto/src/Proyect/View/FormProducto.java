@@ -12,7 +12,7 @@ package Proyect.View;
 
 import Proyect.Model.Producto;
 import javax.swing.JOptionPane;
-import Proyect.Controler.ProductoDAO;
+
 
 public class FormProducto extends javax.swing.JFrame {
     private boolean modoEdicion = false;
@@ -125,7 +125,7 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
             }
         });
 
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Galletas", "Golosinas", "Pan", "Miscelanea" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

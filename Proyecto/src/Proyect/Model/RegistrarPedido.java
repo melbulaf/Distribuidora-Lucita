@@ -57,20 +57,20 @@ public class RegistrarPedido {
     ArrayList<Producto> productos = Inventario.instancia.obtenerProductos();
 
     for (Producto producto : productos) {
-        if (producto.getNombre().equalsIgnoreCase(nombreProducto)) {
-            if (producto.getCantidad() > cantidadVendida) {
+        if (producto.nombre.equalsIgnoreCase(nombreProducto)) {
+            if (producto.cantidad > cantidadVendida) {
                 // Crear pedido
                 RegistrarPedido nuevoPedido = new RegistrarPedido(producto, cantidadVendida, nombreCliente, fecha);
                 listaDePedidos.add(nuevoPedido);
 
                 // Actualizar cantidad disponible en inventario
-                producto.setCantidad(producto.getCantidad() - cantidadVendida);
+                producto.setCantidad(producto.cantidad - cantidadVendida);
 
                 System.out.println("Pedido registrado exitosamente:");
                 guardarCR();
                 return true;
             } else {
-                System.out.println("Error: No hay suficiente stock para el producto: " + producto.getNombre());
+                System.out.println("Error: No hay suficiente stock para el producto: " + producto.nombre);
                 JOptionPane.showMessageDialog(null, "cantidad insuficiente");
                     return false;
             }
@@ -89,7 +89,7 @@ public class RegistrarPedido {
         for (int i = listaDePedidos.size() - 1; i >= 0; i--) {
             RegistrarPedido p = listaDePedidos.get(i);
             salida.println(
-                p.getProducto().getNombre() + "," +
+                p.getProducto().nombre + "," +
                 p.getCantidadVendida() + "," +
                 p.getcliente() + "," +
                 p.getFecha()
@@ -127,7 +127,7 @@ public class RegistrarPedido {
             Producto productoEncontrado = null;
 
             for (Producto p : Inventario.productos) {
-                if (p.getNombre().equalsIgnoreCase(nombreProducto)) {
+                if (p.nombre.equalsIgnoreCase(nombreProducto)) {
                     productoEncontrado = p;
                     break;
                 }

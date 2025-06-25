@@ -111,6 +111,10 @@ public class Producto {
             ex.printStackTrace(System.out);
         }
     }
+    
+    public void setCantidad(int c) {
+        this.cantidad = c;
+    }
 
     // Carga los productos desde el archivo y los agrega a la lista y al inventario
     public static void cargarProductos() {

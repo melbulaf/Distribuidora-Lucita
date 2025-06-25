@@ -34,8 +34,8 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
     }
 
     private void cargarDatosProducto() {
-        txtNombre.setText(productoExistente.getNombre());
-        txtCantidad.setText(String.valueOf(productoExistente.getCantidad()));
+        txtNombre.setText(productoExistente.nombre);
+        txtCantidad.setText(String.valueOf(productoExistente.cantidad));
         txtPrecio.setText(String.valueOf(productoExistente.precio));
         txtPrecioC.setText(String.valueOf(productoExistente.precioC));
         txtUnidad.setText("Unidad"); // si tienes unidad, agregarla aquí
@@ -280,7 +280,7 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
         // Aquí puedes validar si el producto ya existe (por nombre por ejemplo)
         boolean productoExiste = false;
         for (Producto p : Proyect.Model.Inventario.getInstancia().obtenerProductos()) {
-            if (p.getNombre().equalsIgnoreCase(nombre)) {
+            if (p.nombre.equalsIgnoreCase(nombre)) {
                 productoExiste = true;
                 break;
             }

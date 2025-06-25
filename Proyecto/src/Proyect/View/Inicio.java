@@ -37,7 +37,6 @@ public class Inicio extends javax.swing.JFrame {
     // === INICIALIZA TUS FORMULARIOS ===
     private void inicializarFormularios() {
         // Inventario
-        MisDatosDeEjemplo.crearProductos();
         
         objFormInventario = new FormInventario();
         jifFormInventario.setContentPane(objFormInventario);

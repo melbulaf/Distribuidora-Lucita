@@ -7,6 +7,7 @@ import Proyect.Model.Producto;
 import Proyect.Model.Inventario;
 import javax.swing.JOptionPane;
 import Proyect.Model.Compra;
+import static Proyect.Model.Producto.guardarProductos;
 
 /**
  *
@@ -200,6 +201,7 @@ public class FormCompra extends javax.swing.JFrame {
                     historial.actualizarTabla();
                 }
                 Compra.guardarC();
+                guardarProductos();
                 JOptionPane.showMessageDialog(null, "Compra Registrada Correctamente.", "Registrado", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Producto No Encontrado. Comprueba el Catalogo o\nregistra un producto nuevo.", "No Encontrado", JOptionPane.ERROR_MESSAGE);

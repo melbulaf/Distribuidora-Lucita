@@ -171,7 +171,17 @@ public class FormCompra extends javax.swing.JFrame {
         }
         else {
             String nombreCodigo = codigoNombre.getText();
-            int cant = Integer.parseInt(cantidad.getText());
+            int cant;
+            try {
+                cant = Integer.parseInt(cantidad.getText());
+                if (cant <= 0) {
+                    JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor que cero.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "La cantidad debe ser un numero entero valido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             Producto encontrado = null;
             try {
                 int codigoBuscado = Integer.parseInt(nombreCodigo); // evaluar si es código

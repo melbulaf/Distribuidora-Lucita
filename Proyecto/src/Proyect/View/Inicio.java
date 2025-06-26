@@ -25,7 +25,6 @@ public class Inicio extends javax.swing.JFrame {
     private FormHistoriaCompra objFormHCompras;
     private FormProducto objFormNProducto;
     private FormEditar objFormEditar;
-    private FormRegistrarPedido objFormPedido;
     private javax.swing.JMenuItem menuItemRutaDelDia;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
@@ -96,16 +95,6 @@ public class Inicio extends javax.swing.JFrame {
         jifFormEditar.setSize(700,500);
         jifFormEditar.setVisible(false);
         
-        //Registrar Pedido
-        jifFormPedido.setClosable(true);
-        jifFormPedido.setIconifiable(true);
-        jifFormPedido.setMaximizable(true);
-        jifFormPedido.setResizable(true);
-        objFormPedido = new FormRegistrarPedido();
-        jifFormPedido.setContentPane(objFormPedido);
-        jifFormPedido.setSize(870,500);
-        jifFormPedido.setVisible(false);
-        
     }
 
     // === AGREGA EL MENÚ Y SU ACCIÓN ===
@@ -122,10 +111,8 @@ public class Inicio extends javax.swing.JFrame {
                 jifFormRutas.setSize(700, 500);
                 desktopPane.add(jifFormRutas);
                 jifFormRutas.setVisible(true);
-                centrarInternalFrame(jifFormRutas);
             } else {
                 jifFormRutas.setVisible(true);
-                centrarInternalFrame(jifFormRutas);
                 jifFormRutas.toFront();
                 try {
                     jifFormRutas.setSelected(true);
@@ -134,17 +121,6 @@ public class Inicio extends javax.swing.JFrame {
         }
     });
 }
-    
-    //Metodo para centrar los Internal Frame
-    private void centrarInternalFrame(javax.swing.JInternalFrame frame) {
-        int desktopWidth = desktopPane.getWidth();
-        int desktopHeight = desktopPane.getHeight();
-        int frameWidth = frame.getWidth();
-        int frameHeight = frame.getHeight();
-        int x = (desktopWidth - frameWidth) / 2;
-        int y = (desktopHeight - frameHeight) / 2;
-        frame.setLocation(x, y);
-    }
     
     
     /**
@@ -161,7 +137,6 @@ public class Inicio extends javax.swing.JFrame {
         jifFormHCompras = new javax.swing.JInternalFrame();
         jifFormEditar = new javax.swing.JInternalFrame();
         jifFormNProducto = new javax.swing.JInternalFrame();
-        jifFormPedido = new javax.swing.JInternalFrame();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         InventarioMenuItem = new javax.swing.JMenuItem();
@@ -249,22 +224,6 @@ public class Inicio extends javax.swing.JFrame {
 
         desktopPane.add(jifFormNProducto);
         jifFormNProducto.setBounds(0, 0, 630, 510);
-
-        jifFormPedido.setVisible(true);
-
-        javax.swing.GroupLayout jifFormPedidoLayout = new javax.swing.GroupLayout(jifFormPedido.getContentPane());
-        jifFormPedido.getContentPane().setLayout(jifFormPedidoLayout);
-        jifFormPedidoLayout.setHorizontalGroup(
-            jifFormPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jifFormPedidoLayout.setVerticalGroup(
-            jifFormPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        desktopPane.add(jifFormPedido);
-        jifFormPedido.setBounds(0, 0, 650, 500);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -390,10 +349,8 @@ public class Inicio extends javax.swing.JFrame {
             jifFormInventario.setSize(700, 500);
             desktopPane.add(jifFormInventario);
             jifFormInventario.setVisible(true);
-            centrarInternalFrame(jifFormInventario);
         } else {
             jifFormInventario.setVisible(true);
-            centrarInternalFrame(jifFormInventario);
             jifFormInventario.toFront();
             try {
                 jifFormInventario.setSelected(true);
@@ -413,10 +370,8 @@ public class Inicio extends javax.swing.JFrame {
             jifFormHCompras.setSize(700, 500);
             desktopPane.add(jifFormHCompras);
             jifFormHCompras.setVisible(true);
-            centrarInternalFrame(jifFormHCompras);
         } else {
             jifFormHCompras.setVisible(true);
-            centrarInternalFrame(jifFormHCompras);
             jifFormHCompras.toFront();
             try {
                 jifFormHCompras.setSelected(true);
@@ -425,22 +380,8 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_ComprasActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if (jifFormPedido == null || jifFormPedido.isClosed()) {
-            objFormPedido = new FormRegistrarPedido();
-            jifFormPedido = new javax.swing.JInternalFrame("Registrar Pedido", true, true, true, true);
-            jifFormPedido.setContentPane(objFormPedido);
-            jifFormPedido.setSize(700, 500);
-            desktopPane.add(jifFormPedido);
-            jifFormPedido.setVisible(true);
-            centrarInternalFrame(jifFormPedido);
-        } else {
-            jifFormPedido.setVisible(true);
-            centrarInternalFrame(jifFormPedido);
-            jifFormPedido.toFront();
-            try {
-                jifFormPedido.setSelected(true);
-            } catch (java.beans.PropertyVetoException ex) {}
-        }
+        FormRegistrarPedido c = new FormRegistrarPedido();
+        c.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void menuItemNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNuevoProductoActionPerformed
@@ -451,10 +392,8 @@ public class Inicio extends javax.swing.JFrame {
             jifFormNProducto.setSize(700, 500);
             desktopPane.add(jifFormNProducto);
             jifFormNProducto.setVisible(true);
-            centrarInternalFrame(jifFormNProducto);
         } else {
             jifFormNProducto.setVisible(true);
-            centrarInternalFrame(jifFormNProducto);
             jifFormNProducto.toFront();
             try {
                 jifFormNProducto.setSelected(true);
@@ -467,13 +406,11 @@ public class Inicio extends javax.swing.JFrame {
             objFormEditar = new FormEditar();
             jifFormEditar = new javax.swing.JInternalFrame("Editar Producto", true, true, true, true);
             jifFormEditar.setContentPane(objFormEditar);
-            jifFormEditar.setSize(700,700);
+            jifFormEditar.setSize(700, 500);
             desktopPane.add(jifFormEditar);
             jifFormEditar.setVisible(true);
-            centrarInternalFrame(jifFormEditar);
         } else {
             jifFormEditar.setVisible(true);
-            centrarInternalFrame(jifFormEditar);
             jifFormEditar.toFront();
             try {
                 jifFormEditar.setSelected(true);
@@ -501,7 +438,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jifFormHCompras;
     private javax.swing.JInternalFrame jifFormInventario;
     private javax.swing.JInternalFrame jifFormNProducto;
-    private javax.swing.JInternalFrame jifFormPedido;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemNuevoProducto;
     private javax.swing.JMenuItem pasteMenuItem;

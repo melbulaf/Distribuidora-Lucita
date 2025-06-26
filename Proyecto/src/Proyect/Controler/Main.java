@@ -24,11 +24,9 @@ public class Main {
         }
         // Mostrar la ventana
         java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            Inicio inicio = new Inicio();
-            inicio.setSize(1000,700);
-            inicio.setVisible(true);
-        }
-    });
-    } 
+            public void run() {
+                new Inicio().setVisible(true);
+            }
+        });
+    }
 }

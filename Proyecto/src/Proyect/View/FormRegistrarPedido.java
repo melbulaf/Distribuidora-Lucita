@@ -11,16 +11,15 @@ import Proyect.Model.Producto;
 import Proyect.Model.RegistrarPedido;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author pc
  */
-public class FormRegistrarPedido extends javax.swing.JFrame {
-    
+public class FormRegistrarPedido extends javax.swing.JPanel {
+
     DefaultTableModel mt = new DefaultTableModel();
     Producto cantidadDelproducto;
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormRegistrarPedido.class.getName());
 
     /**
@@ -29,13 +28,12 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
     private Inventario inventario;
 
     public FormRegistrarPedido() {
-       initComponents();
-       String ids [] ={"Nombre del producto", "Cantidad", "Cliente", "Fecha"};
-       mt.setColumnIdentifiers(ids);
-       jTable1.setModel(mt);
-       this.inventario = inventario; // usa el inventario ya existente    
-       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-}
+        initComponents();
+        String ids [] ={"Nombre del producto", "Cantidad", "Cliente", "Fecha"};
+        mt.setColumnIdentifiers(ids);
+        jTable1.setModel(mt);
+        this.inventario = inventario; // usa el inventario ya existente    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,8 +56,6 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         fech = new com.toedter.calendar.JDateChooser();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Produc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,15 +118,15 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre del producto", "cantidad", "Nombre del cliente", "fecha"
+                "Nombre del producto", "Cantidad", "Nombre del cliente", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jLabel5.setText("Pedidos");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -182,8 +178,6 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientActionPerformed
@@ -192,15 +186,12 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        
-      
+
         String nombreProducto = Produc.getText();
         String cantidadStr = cant.getText();
         String cliente = client.getText();
         java.util.Date fechaSeleccionada = fech.getDate(); // null si no se elige
         String fecha = null;
-        
 
         if (fechaSeleccionada != null) {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
@@ -211,52 +202,22 @@ public class FormRegistrarPedido extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos");
             return;
         }
-        
-        int cantidad = Integer.parseInt(cantidadStr.trim()); // ✅ más seguro
 
-        
+        int cantidad = Integer.parseInt(cantidadStr.trim());
+
         boolean exito = RegistrarPedido.pedidoRegistrado(nombreProducto, cantidad, cliente, fecha);
         if (exito) {
             mt.addRow(new Object[]{nombreProducto, cantidad, cliente, fecha});
-            
+
             Produc.setText("");
             cant.setText("");
             client.setText("");
         }
-        
-        
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ProducActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProducActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ProducActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FormRegistrarPedido().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Produc;

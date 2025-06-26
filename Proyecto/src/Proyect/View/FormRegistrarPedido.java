@@ -32,7 +32,14 @@ public class FormRegistrarPedido extends javax.swing.JPanel {
         String ids [] ={"Nombre del producto", "Cantidad", "Cliente", "Fecha"};
         mt.setColumnIdentifiers(ids);
         jTable1.setModel(mt);
-        this.inventario = inventario; // usa el inventario ya existente    
+        this.inventario = inventario; // usa el inventario ya existente  
+        for (RegistrarPedido p: RegistrarPedido.listaDePedidos) {
+            String nombreProducto = p.getProducto().nombre;
+            int cantidad = p.getCantidadVendida();
+            String cliente = p.getcliente();
+            String fecha = p.getFecha();
+            mt.addRow(new Object[]{nombreProducto, cantidad, cliente, fecha});
+        }
     }
 
     /**

@@ -8,9 +8,6 @@ package Proyect.View;
  *
  * @author Samuel
  */
-
-
-import Proyect.Model.MisDatosDeEjemplo;
 import Proyect.Model.Producto;
 import Proyect.View.FormInventario;
 import Proyect.View.FormRutas;
@@ -21,6 +18,7 @@ import java.util.ArrayList;
 
 public class Inicio extends javax.swing.JFrame {
     // === VARIABLES GLOBALES ===
+    public static ArrayList<Ruta> rutas = Ruta.rutasPorDefecto();
     private FormInventario objFormInventario;
     private FormHistoriaCompra objFormHCompras;
     private FormProducto objFormNProducto;
@@ -53,8 +51,7 @@ public class Inicio extends javax.swing.JFrame {
         jifFormInventario.setVisible(false);
 
         // Ruta del Día
-        ArrayList<Ruta> rutas = MisDatosDeEjemplo.crearRutas(); 
-        objFormRutas = new FormRutas(rutas);
+        objFormRutas = new FormRutas(rutas); // <-- usa la lista global rutas
         jifFormRutas = new javax.swing.JInternalFrame("Ruta del Día", true, true, true, true);
         jifFormRutas.setContentPane(objFormRutas);
         objFormRutas.setSize(700,500);
@@ -420,7 +417,6 @@ public class Inicio extends javax.swing.JFrame {
 
     private void menuItemRutaDelDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRutaDelDiaActionPerformed
         if (jifFormRutas == null || jifFormRutas.isClosed()) {
-                ArrayList<Ruta> rutas = MisDatosDeEjemplo.crearRutas();
                 objFormRutas = new FormRutas(rutas);
                 jifFormRutas = new javax.swing.JInternalFrame("Ruta del Día", true, true, true, true);
                 jifFormRutas.setContentPane(objFormRutas);

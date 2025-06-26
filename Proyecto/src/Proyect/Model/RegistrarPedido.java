@@ -23,7 +23,7 @@ public class RegistrarPedido {
     private int cantidadVendida;
     private String NombreCliente;
     private String fecha;
-    static ArrayList<RegistrarPedido> listaDePedidos = new ArrayList<>();
+    public static ArrayList<RegistrarPedido> listaDePedidos = new ArrayList<>();
     static{
         cargarCR();
     }
@@ -103,7 +103,7 @@ public class RegistrarPedido {
 
     
     public static void cargarCR() {
-    File archivoCompras = new File("src\\Proyecto\\Controler\\BD\\RegistrarPedido.txt");
+    File archivoCompras = new File("src\\Proyect\\Controler\\BD\\RegistrarPedido.txt");
     try {
         BufferedReader leer = new BufferedReader(new FileReader(archivoCompras));
         listaDePedidos.clear();  // Limpiamos la lista antes de cargar nuevos datos
@@ -148,5 +148,15 @@ public class RegistrarPedido {
         ex.printStackTrace(System.out);
     }
 }
+     public static String obtenerDiaSemana(String fechaStr) {
+        try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date fecha = sdf.parse(fechaStr);
+            java.time.LocalDate localDate = fecha.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+            return localDate.getDayOfWeek().getDisplayName(java.time.format.TextStyle.FULL, new java.util.Locale("es", "ES"));
+        } catch (java.text.ParseException e) {
+            return "";
+        }
+    }
 
 }

@@ -208,7 +208,10 @@ public class FormRegistrarPedido extends javax.swing.JPanel {
         boolean exito = RegistrarPedido.pedidoRegistrado(nombreProducto, cantidad, cliente, fecha);
         if (exito) {
             mt.addRow(new Object[]{nombreProducto, cantidad, cliente, fecha});
+<<<<<<< HEAD
 
+=======
+>>>>>>> 59883f7727a6555c15ff6c81cdc32559c891f68a
             Produc.setText("");
             cant.setText("");
             client.setText("");

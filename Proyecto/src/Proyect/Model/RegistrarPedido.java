@@ -58,7 +58,7 @@ public class RegistrarPedido {
 
     for (Producto producto : productos) {
         if (producto.nombre.equalsIgnoreCase(nombreProducto)) {
-            if (producto.cantidad > cantidadVendida) {
+            if (producto.cantidad >= cantidadVendida) {
                 // Crear pedido
                 RegistrarPedido nuevoPedido = new RegistrarPedido(producto, cantidadVendida, nombreCliente, fecha);
                 listaDePedidos.add(nuevoPedido);

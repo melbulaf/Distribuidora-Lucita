@@ -1,14 +1,8 @@
 package Proyect.View;
 
-/**
- * Rutas del Dia
- * @author MELANIE BULA FUENTES
- */
-
 import Proyect.Model.Ruta;
 import Proyect.Model.Producto;
-import Proyect.Model.Pedido;
-import Proyect.Model.Cliente;
+import Proyect.Model.RegistrarPedido;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -35,8 +29,6 @@ public class FormRutas extends javax.swing.JPanel {
     // ---- Datos ----
     private ArrayList<Ruta> rutas;
     private Ruta rutaActual;
-    private Pedido pedidoActual;
-    private Cliente clienteActual;
 
     // ---- Imagen lateral ----
     private int imgIndex = 0, imgCount = 2;
@@ -252,15 +244,8 @@ public class FormRutas extends javax.swing.JPanel {
      * Busca la ruta del día actual y la muestra.
      */
     private void cargarRutaDeHoy() {
-        String diaActual = LocalDate.now()
-            .getDayOfWeek()
-            .getDisplayName(TextStyle.FULL, new Locale("es", "ES"))
-            .toLowerCase();
-        String diaActualNorm = normalizarDia(diaActual);
-
-        // SI ES JUEVES O DOMINGO: muestra mensaje y oculta paneles
-        if (diaActualNorm.equals("jueves") || diaActualNorm.equals("domingo")) {
-            lblRutaNombre.setText("NO HAY ENTREGAS HOY (" + diaActual + ")");
+        lblRutaNombre.setText(Ruta.mensajeCabecera(rutas));
+        if (!Ruta.esHoyLaboral()) {
             lblRutaNombre.setForeground(acentoRojo);
             setBackground(new Color(255, 247, 247));
             panelImagen.setVisible(false);
@@ -268,36 +253,57 @@ public class FormRutas extends javax.swing.JPanel {
             return;
         }
 
-        // Busca la ruta del día actual
-        Ruta rutaHoy = null;
-        for (Ruta r : rutas) {
-            if (normalizarDia(r.dia).equals(diaActualNorm)) {
-                rutaHoy = r;
-                break;
-            }
-        }
-        if (rutaHoy == null && !rutas.isEmpty()) {
-            rutaHoy = rutas.get(0);
-        }
-        if (rutaHoy != null) {
-            rutaActual = rutaHoy;
-            setBackground(azulFondo);
-            panelImagen.setVisible(true);
-            panelDerecho.setVisible(true);
+        rutaActual = Ruta.rutaDeHoy(rutas);
+        setBackground(azulFondo);
+        panelImagen.setVisible(true);
+        panelDerecho.setVisible(true);
 
-            // Día abreviado para imágenes
-            diaAbrev = abrevDia(diaActualNorm);
+        if (rutaActual != null) {
+            String diaActual = LocalDate.now()
+                .getDayOfWeek()
+                .getDisplayName(java.time.format.TextStyle.FULL, new Locale("es", "ES"))
+                .toLowerCase();
+            diaAbrev = abrevDia(normalizarDia(diaActual));
             imgCount = diaAbrev.equals("mie") ? 3 : 2;
             imgIndex = 0;
             mostrarImagenDelDia();
 
-            // Cabecera: "Día de la semana: Ruta ..."
-            String mayusDia = diaActual.substring(0,1).toUpperCase() + diaActual.substring(1);
-            lblRutaNombre.setText(mayusDia + ": Ruta " + rutaActual.nombreRuta);
-            lblRutaNombre.setForeground(Color.WHITE);
-
             cargarPedidos();
             cardLayout.show(panelDerecho, "tabla");
+        } else {
+            panelImagen.setVisible(false);
+            panelDerecho.setVisible(false);
+        }
+    }
+
+    // Cargar SOLO los pedidos del día actual y la ruta actual
+    private void cargarPedidos() {
+        modeloPedidos.setRowCount(0);
+
+        String fechaDeHoy = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
+        String diaDeHoy = new java.text.SimpleDateFormat("EEEE", new java.util.Locale("es", "ES")).format(new java.util.Date());
+        String diaDeHoyNormalizado = Ruta.normalizaDia(diaDeHoy);
+
+        boolean hayPedidos = false;
+        for (RegistrarPedido pedido : RegistrarPedido.listaDePedidos) {
+            String diaPedido = Ruta.normalizaDia(RegistrarPedido.obtenerDiaSemana(pedido.getFecha()));
+            if (pedido.getFecha().equals(fechaDeHoy) &&
+                diaPedido.equalsIgnoreCase(rutaActual != null ? Ruta.normalizaDia(rutaActual.dia) : "")) {
+                modeloPedidos.addRow(new Object[]{
+                    pedido.getProducto().nombre,
+                    "Lugar no definido", // Modifica si tienes campo lugar
+                    pedido.getcliente(), // Aquí va el nombre del cliente como String
+                    false // Urgente: adapta si tienes ese campo
+                });
+                hayPedidos = true;
+            }
+        }
+
+        if (!hayPedidos) {
+            modeloPedidos.addRow(new Object[]{"No hay pedidos para esta ruta hoy", "", "", false});
+            tablaPedidos.setEnabled(false);
+        } else {
+            tablaPedidos.setEnabled(true);
         }
     }
 
@@ -319,17 +325,11 @@ public class FormRutas extends javax.swing.JPanel {
         }
     }
 
-    /**
-     * Cambia a la siguiente imagen del día.
-     */
     private void cambiarImagenCiclo() {
         imgIndex = (imgIndex + 1) % imgCount;
         mostrarImagenDelDia();
     }
 
-    /**
-     * Muestra la imagen lateral del día según imgIndex.
-     */
     private void mostrarImagenDelDia() {
         String baseNombre = "/Proyect/img/img_" + diaAbrev + (imgIndex + 1);
         String[] extensiones = { ".png", ".jpg", ".jpeg" };
@@ -349,17 +349,10 @@ public class FormRutas extends javax.swing.JPanel {
         imgLabel.repaint();
     }
 
-    /**
-     * Llena la tabla con los pedidos de la ruta actual.
-     */
-    private void cargarPedidos() {
-        modeloPedidos.setRowCount(0);
-        if (rutaActual == null) return;
-        for (Cliente c : rutaActual.clientes) {
-            for (Pedido p : c.pedidos) {
-                modeloPedidos.addRow(new Object[]{p.nombre, p.lugar, c, p.urgente});
-            }
-        }
+    private String normalizarDia(String dia) {
+        return Normalizer.normalize(dia, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .toLowerCase();
     }
 
     /**
@@ -369,22 +362,28 @@ public class FormRutas extends javax.swing.JPanel {
         int modelRow = tablaPedidos.convertRowIndexToModel(row);
         String nombrePedido = (String) modeloPedidos.getValueAt(modelRow, 0);
         String lugarPedido = (String) modeloPedidos.getValueAt(modelRow, 1);
-        Cliente c = (Cliente) modeloPedidos.getValueAt(modelRow, 2);
+        Object clienteObj = modeloPedidos.getValueAt(modelRow, 2); // Puede ser String
         boolean urgente = (boolean) modeloPedidos.getValueAt(modelRow, 3);
-        Pedido pedido = null;
-        for (Pedido p : c.pedidos) {
-            if (p.nombre.equals(nombrePedido) && p.lugar.equals(lugarPedido)) {
-                pedido = p; break;
+
+        String nombreCliente = clienteObj.toString();
+
+        // Busca el pedido desde la lista global de pedidos
+        RegistrarPedido pedido = null;
+        for (RegistrarPedido p : RegistrarPedido.listaDePedidos) {
+            if (p.getProducto().nombre.equals(nombrePedido)
+                && p.getcliente().equals(nombreCliente)) {
+                pedido = p;
+                break;
             }
         }
         if (pedido == null) return;
-        pedidoActual = pedido;
-        clienteActual = c;
-        lblDetalleNombre.setText("Pedido: " + pedido.nombre);
+
+        // Ahora muestra info en los labels:
+        lblDetalleNombre.setText("Pedido: " + pedido.getProducto().nombre);
         lblDetalleNombre.setForeground(azulPrincipal);
-        lblDetalleCliente.setText("Cliente: " + c.nombre);
-        lblDetalleLugar.setText("Lugar: " + pedido.lugar);
-        lblDetalleHora.setText("Hora: " + (pedido.hora != null ? pedido.hora : "Sin hora"));
+        lblDetalleCliente.setText("Cliente: " + nombreCliente);
+        lblDetalleLugar.setText("Lugar: " + (lugarPedido != null ? lugarPedido : "No especificado"));
+        lblDetalleHora.setText("Fecha: " + (pedido.getFecha() != null ? pedido.getFecha() : "Sin fecha"));
         if (urgente) {
             lblDetalleUrgente.setText("⚠️ ¡¡¡URGENTE!!!");
             lblDetalleUrgente.setForeground(acentoRojo);
@@ -393,16 +392,8 @@ public class FormRutas extends javax.swing.JPanel {
             lblDetalleUrgente.setForeground(azulPrincipal);
         }
         StringBuilder sb = new StringBuilder();
-        for (Producto prod : pedido.productos) {
-            sb.append("• ").append(prod.nombre).append(": ").append(prod.cantidad).append("\n");
-        }
+        sb.append("• ").append(pedido.getProducto().nombre).append(": ").append(pedido.getCantidadVendida());
         areaDetalleProductos.setText(sb.toString());
         cardLayout.show(panelDerecho, "detalle");
-    }
-
-    private String normalizarDia(String dia) {
-        return Normalizer.normalize(dia, Normalizer.Form.NFD)
-                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
-                .toLowerCase();
     }
 }

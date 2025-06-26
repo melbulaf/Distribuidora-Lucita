@@ -20,6 +20,21 @@ public class FormInventario extends javax.swing.JPanel {
      */
     public FormInventario() {
         initComponents();
+        //Inicializar la Tabla ordenando por Codigo.
+        ArrayList<Producto> productosSorted = new ArrayList<>(Inventario.productos);
+        productosSorted.sort((a, b) -> Integer.compare(a.getCodigo(), b.getCodigo()));
+        DefaultTableModel modelo = (DefaultTableModel) TablaProductos.getModel();
+        modelo.setRowCount(0); // Limpia la tabla
+        for (Producto p : productosSorted) {
+            modelo.addRow(new Object[]{
+                p.getCodigo(),
+                p.nombre,
+                p.categoria,
+                p.precio,
+                p.precioC,
+                p.cantidad
+            });
+        }
     }
 
     /**
@@ -223,39 +238,48 @@ public class FormInventario extends javax.swing.JPanel {
     }//GEN-LAST:event_BotonOrdenarActionPerformed
 
     private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
-        String NombreCodigo = CampoBusqueda.getText();
-        Producto encontrado = null;
+        String NombreCodigo = CampoBusqueda.getText().trim().toLowerCase();
+        DefaultTableModel modelo = (DefaultTableModel) TablaProductos.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+        boolean encontrado = false;
+
         try {
-            int codigoBuscado = Integer.parseInt(NombreCodigo); // evaluar si es código
+            int codigoBuscado = Integer.parseInt(NombreCodigo);//evalua si es codigo
             for (Producto p : Inventario.productos) {
                 if (p.getCodigo() == codigoBuscado) {
-                    encontrado = p;
+                    modelo.addRow(new Object[]{
+                        p.getCodigo(),
+                        p.nombre,
+                        p.categoria,
+                        p.precio,
+                        p.precioC,
+                        p.cantidad
+                    });
+                    encontrado = true;
                     break;
                 }
             }
-        } catch (NumberFormatException e) { // si no es número, buscar por nombre
+        } catch (NumberFormatException e) {
             for (Producto p : Inventario.productos) {
-                if (p.nombre.equalsIgnoreCase(NombreCodigo)) {
-                    encontrado = p;
-                    break;
+                if (p.nombre.toLowerCase().contains(NombreCodigo)) {//evaluar por nombre
+                    modelo.addRow(new Object[]{
+                        p.getCodigo(),
+                        p.nombre,
+                        p.categoria,
+                        p.precio,
+                        p.precioC,
+                        p.cantidad
+                    });
+                    encontrado = true;
                 }
             }
         }
 
-        if (encontrado != null) {
+        if (encontrado) {
             MensajeError.setVisible(false);
-            DefaultTableModel modelo = (DefaultTableModel) TablaProductos.getModel();
-            while (modelo.getRowCount() > 0) {
-                modelo.removeRow(0);
-            }
-            modelo.addRow(new Object[]{
-                encontrado.getCodigo(),
-                encontrado.nombre,
-                encontrado.categoria,
-                encontrado.precio,
-                encontrado.precioC,
-                encontrado.cantidad
-            });
         } else {
             MensajeError.setVisible(true);
             MensajeError.setText("Producto no registrado en el inventario");

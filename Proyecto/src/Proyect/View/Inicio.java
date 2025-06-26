@@ -24,6 +24,7 @@ public class Inicio extends javax.swing.JFrame {
     private FormInventario objFormInventario;
     private FormHistoriaCompra objFormHCompras;
     private FormProducto objFormNProducto;
+    private FormEditar objFormEditar;
     private javax.swing.JMenuItem menuItemRutaDelDia;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
@@ -84,6 +85,16 @@ public class Inicio extends javax.swing.JFrame {
         jifFormNProducto.setSize(700,500);
         jifFormNProducto.setVisible(false);
         
+        //Editar
+        jifFormEditar.setClosable(true);
+        jifFormEditar.setIconifiable(true);
+        jifFormEditar.setMaximizable(true);
+        jifFormEditar.setResizable(true);
+        objFormEditar = new FormEditar();
+        jifFormEditar.setContentPane(objFormEditar);
+        jifFormEditar.setSize(700,500);
+        jifFormEditar.setVisible(false);
+        
     }
 
     // === AGREGA EL MENÚ Y SU ACCIÓN ===
@@ -124,6 +135,7 @@ public class Inicio extends javax.swing.JFrame {
         desktopPane = new javax.swing.JDesktopPane();
         jifFormInventario = new javax.swing.JInternalFrame();
         jifFormHCompras = new javax.swing.JInternalFrame();
+        jifFormEditar = new javax.swing.JInternalFrame();
         jifFormNProducto = new javax.swing.JInternalFrame();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -179,7 +191,23 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         desktopPane.add(jifFormHCompras);
-        jifFormHCompras.setBounds(20, 0, 550, 530);
+        jifFormHCompras.setBounds(50, 0, 550, 530);
+
+        jifFormEditar.setVisible(true);
+
+        javax.swing.GroupLayout jifFormEditarLayout = new javax.swing.GroupLayout(jifFormEditar.getContentPane());
+        jifFormEditar.getContentPane().setLayout(jifFormEditarLayout);
+        jifFormEditarLayout.setHorizontalGroup(
+            jifFormEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jifFormEditarLayout.setVerticalGroup(
+            jifFormEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        desktopPane.add(jifFormEditar);
+        jifFormEditar.setBounds(0, 0, 590, 500);
 
         jifFormNProducto.setVisible(true);
 
@@ -195,7 +223,7 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         desktopPane.add(jifFormNProducto);
-        jifFormNProducto.setBounds(0, 0, 540, 500);
+        jifFormNProducto.setBounds(0, 0, 630, 510);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -374,8 +402,20 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemNuevoProductoActionPerformed
 
     private void MEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEditarActionPerformed
-        FormEditar formMEditar = new FormEditar();
-        formMEditar.setVisible(true);
+        if (jifFormEditar == null || jifFormEditar.isClosed()) {
+            objFormEditar = new FormEditar();
+            jifFormEditar = new javax.swing.JInternalFrame("Editar Producto", true, true, true, true);
+            jifFormEditar.setContentPane(objFormEditar);
+            jifFormEditar.setSize(700, 500);
+            desktopPane.add(jifFormEditar);
+            jifFormEditar.setVisible(true);
+        } else {
+            jifFormEditar.setVisible(true);
+            jifFormEditar.toFront();
+            try {
+                jifFormEditar.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {}
+        }
     }//GEN-LAST:event_MEditarActionPerformed
 
     
@@ -394,6 +434,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JInternalFrame jifFormEditar;
     private javax.swing.JInternalFrame jifFormHCompras;
     private javax.swing.JInternalFrame jifFormInventario;
     private javax.swing.JInternalFrame jifFormNProducto;

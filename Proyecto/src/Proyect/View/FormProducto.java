@@ -46,7 +46,7 @@ public class FormProducto extends JPanel {
         txtCantidad = new JTextField(15);
         txtPrecio = new JTextField(15);
         txtPrecioC = new JTextField(15);
-        cmbCategoria = new JComboBox<>(new String[]{"General", "Galletas", "Golosinas", "Helader�a", "Miscelanea", "Panader�a", "Supermercado", "Ferreter�a"});
+        cmbCategoria = new JComboBox<>(new String[]{"General", "Galletas", "Golosinas", "Heladeria", "Miscelanea", "Panaderia", "Supermercado", "Ferreteria"});
         jButton1 = new JButton("Guardar");
         jButton2 = new JButton("Cancelar");
         jLabel7 = new JLabel(modoEdicion ? "Editar Producto" : "Producto Nuevo", SwingConstants.CENTER);
@@ -64,7 +64,7 @@ public class FormProducto extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy++;
-        add(new JLabel("Categor�a"), gbc);
+        add(new JLabel("Categoria"), gbc);
         gbc.gridx = 1;
         add(cmbCategoria, gbc);
 
@@ -118,7 +118,7 @@ public class FormProducto extends JPanel {
                 return;
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "La cantidad debe ser un n�mero entero v�lido.");
+            JOptionPane.showMessageDialog(this, "La cantidad debe ser un numero entero valido.");
             return;
         }
 
@@ -129,7 +129,7 @@ public class FormProducto extends JPanel {
                 return;
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El precio de venta debe ser un n�mero v�lido.");
+            JOptionPane.showMessageDialog(this, "El precio de venta debe ser un numero valido.");
             return;
         }
 
@@ -140,7 +140,7 @@ public class FormProducto extends JPanel {
                 return;
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El precio de compra debe ser un n�mero v�lido.");
+            JOptionPane.showMessageDialog(this, "El precio de compra debe ser un numero valido.");
             return;
         }
 

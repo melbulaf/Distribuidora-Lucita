@@ -26,7 +26,6 @@ public class Inicio extends javax.swing.JFrame {
     private FormProducto objFormNProducto;
     private FormEditar objFormEditar;
     private FormRegistrarPedido objFormPedido;
-    private javax.swing.JMenuItem menuItemRutaDelDia;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
 
@@ -36,7 +35,6 @@ public class Inicio extends javax.swing.JFrame {
         initComponents(); // NetBeans GUI
         Producto.cargarProductos();
         inicializarFormularios();
-        inicializarMenuRutaDelDia();
         
     }
 
@@ -107,33 +105,6 @@ public class Inicio extends javax.swing.JFrame {
         jifFormPedido.setVisible(false);
         
     }
-
-    // === AGREGA EL MENÚ Y SU ACCIÓN ===
-    private void inicializarMenuRutaDelDia() {
-    menuItemRutaDelDia = new javax.swing.JMenuItem("Ruta del Día");
-    fileMenu.add(menuItemRutaDelDia);
-    menuItemRutaDelDia.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            if (jifFormRutas == null || jifFormRutas.isClosed()) {
-                ArrayList<Ruta> rutas = MisDatosDeEjemplo.crearRutas();
-                objFormRutas = new FormRutas(rutas);
-                jifFormRutas = new javax.swing.JInternalFrame("Ruta del Día", true, true, true, true);
-                jifFormRutas.setContentPane(objFormRutas);
-                jifFormRutas.setSize(700, 500);
-                desktopPane.add(jifFormRutas);
-                jifFormRutas.setVisible(true);
-                centrarInternalFrame(jifFormRutas);
-            } else {
-                jifFormRutas.setVisible(true);
-                centrarInternalFrame(jifFormRutas);
-                jifFormRutas.toFront();
-                try {
-                    jifFormRutas.setSelected(true);
-                } catch (java.beans.PropertyVetoException ex) {}
-            }
-        }
-    });
-}
     //Metodo para centrar los Internal FrameAdd commentMore actions
     private void centrarInternalFrame(javax.swing.JInternalFrame frame) {
         int desktopWidth = desktopPane.getWidth();
@@ -164,19 +135,12 @@ public class Inicio extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         InventarioMenuItem = new javax.swing.JMenuItem();
-        salirMenuItem = new javax.swing.JMenuItem();
         Compras = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         menuItemNuevoProducto = new javax.swing.JMenuItem();
         MEditar = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        menuItemRutaDelDia = new javax.swing.JMenuItem();
+        salirMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -266,7 +230,7 @@ public class Inicio extends javax.swing.JFrame {
         jifFormNProducto.setBounds(50, 0, 630, 510);
 
         fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
+        fileMenu.setText("Archivo");
         fileMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fileMenuActionPerformed(evt);
@@ -281,15 +245,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         fileMenu.add(InventarioMenuItem);
-
-        salirMenuItem.setMnemonic('x');
-        salirMenuItem.setText("Salir");
-        salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(salirMenuItem);
 
         Compras.setText("Compras");
         Compras.addActionListener(new java.awt.event.ActionListener() {
@@ -323,41 +278,24 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(MEditar);
 
+        menuItemRutaDelDia.setText("Ruta del Dia");
+        menuItemRutaDelDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRutaDelDiaActionPerformed(evt);
+            }
+        });
+        fileMenu.add(menuItemRutaDelDia);
+
+        salirMenuItem.setMnemonic('x');
+        salirMenuItem.setText("Salir");
+        salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(salirMenuItem);
+
         menuBar.add(fileMenu);
-
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
 
@@ -428,7 +366,7 @@ public class Inicio extends javax.swing.JFrame {
             objFormPedido = new FormRegistrarPedido();
             jifFormPedido = new javax.swing.JInternalFrame("Registrar Pedido", true, true, true, true);
             jifFormPedido.setContentPane(objFormPedido);
-            jifFormPedido.setSize(700, 500);
+            jifFormPedido.setSize(850, 500);
             desktopPane.add(jifFormPedido);
             jifFormPedido.setVisible(true);
             centrarInternalFrame(jifFormPedido);
@@ -466,7 +404,7 @@ public class Inicio extends javax.swing.JFrame {
             objFormEditar = new FormEditar();
             jifFormEditar = new javax.swing.JInternalFrame("Editar Producto", true, true, true, true);
             jifFormEditar.setContentPane(objFormEditar);
-            jifFormEditar.setSize(700,700);
+            jifFormEditar.setSize(700,500);
             desktopPane.add(jifFormEditar);
             jifFormEditar.setVisible(true);
             centrarInternalFrame(jifFormEditar);
@@ -480,21 +418,34 @@ public class Inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MEditarActionPerformed
 
+    private void menuItemRutaDelDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRutaDelDiaActionPerformed
+        if (jifFormRutas == null || jifFormRutas.isClosed()) {
+                ArrayList<Ruta> rutas = MisDatosDeEjemplo.crearRutas();
+                objFormRutas = new FormRutas(rutas);
+                jifFormRutas = new javax.swing.JInternalFrame("Ruta del Día", true, true, true, true);
+                jifFormRutas.setContentPane(objFormRutas);
+                jifFormRutas.setSize(700, 500);
+                desktopPane.add(jifFormRutas);
+                jifFormRutas.setVisible(true);
+                centrarInternalFrame(jifFormRutas);
+            } else {
+                jifFormRutas.setVisible(true);
+                centrarInternalFrame(jifFormRutas);
+                jifFormRutas.toFront();
+                try {
+                    jifFormRutas.setSelected(true);
+                } catch (java.beans.PropertyVetoException ex) {}
+            }
+    }//GEN-LAST:event_menuItemRutaDelDiaActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Compras;
     private javax.swing.JMenuItem InventarioMenuItem;
     private javax.swing.JMenuItem MEditar;
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JInternalFrame jifFormEditar;
     private javax.swing.JInternalFrame jifFormHCompras;
@@ -503,7 +454,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jifFormPedido;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemNuevoProducto;
-    private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JMenuItem menuItemRutaDelDia;
     private javax.swing.JMenuItem salirMenuItem;
     // End of variables declaration//GEN-END:variables
 

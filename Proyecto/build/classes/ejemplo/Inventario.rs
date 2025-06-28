@@ -1,1 +1,0 @@
-Paquete_de_fuentes.Inventario

@@ -1,3 +1,5 @@
+El ejecutable es Proyecto.jar.
+
 ========================
 BUILD OUTPUT DESCRIPTION
 ========================

@@ -4,23 +4,54 @@
  */
 package Proyect.View;
 
+import javax.swing.table.DefaultTableModel;
+import Proyect.Model.ResumenDeGanancias;
+import java.util.Arrays;
+
+import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.TableRowSorter;
+import java.util.Arrays;
+import javax.swing.table.TableModel;
+
+
+
+
 /**
  *
  * @author pc
  */
 public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
+    
+    private DefaultTableModel dtm;
+    private Object[] o = new Object[4];
+    
+    
+    
 
     /**
      * Creates new form FromResumenDeGanancias
      */
     public FromResumenDeGanancias() {
         initComponents();
+        
 
         setClosable(true);
         setResizable(true);
         setMaximizable(true);
         setIconifiable(true);
+        
+        
+        dtm =(DefaultTableModel)jTable1.getModel();
+        o[0] = ResumenDeGanancias.nombresDePedidos().get(0);
+        o[1] = 100;
+        o[2] = 100;
+        o[3] = 100;
+        
+        dtm.insertRow(0, o);
     }
+    
     
 
     /**
@@ -40,10 +71,6 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},

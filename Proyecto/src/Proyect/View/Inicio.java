@@ -15,6 +15,9 @@ import Proyect.View.FormHistoriaCompra;
 import Proyect.View.FormProducto;
 import Proyect.Model.Ruta;
 import java.util.ArrayList;
+import Proyect.Model.RegistrarPedido;
+import Proyect.Model.ResumenDeGanancias;
+
 
 public class Inicio extends javax.swing.JFrame {
     // === VARIABLES GLOBALES ===
@@ -26,6 +29,8 @@ public class Inicio extends javax.swing.JFrame {
     private FormRegistrarPedido objFormPedido;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
+    
+    
 
     
     // === CONSTRUCTOR ===
@@ -449,6 +454,10 @@ public class Inicio extends javax.swing.JFrame {
         FromResumenDeGanancias a = new FromResumenDeGanancias();
         desktopPane.add(a);
         a.setVisible(true);
+        
+        System.out.println(ResumenDeGanancias.nombresDePedidos());
+        System.out.println(ResumenDeGanancias.fechasDePedidos());
+       
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 

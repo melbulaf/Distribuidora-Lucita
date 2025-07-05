@@ -14,6 +14,7 @@ import javax.swing.SortOrder;
 import javax.swing.table.TableRowSorter;
 import java.util.Arrays;
 import javax.swing.table.TableModel;
+import Proyect.Model.Producto;
 
 
 
@@ -26,6 +27,7 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
     
     private DefaultTableModel dtm;
     private Object[] o = new Object[4];
+    
     
     
     
@@ -44,12 +46,8 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
         
         
         dtm =(DefaultTableModel)jTable1.getModel();
-        o[0] = ResumenDeGanancias.nombresDePedidos().get(0);
-        o[1] = 100;
-        o[2] = 100;
-        o[3] = 100;
         
-        dtm.insertRow(0, o);
+        ResumenDeGanancias.agregarProductosDeHoyATabla(dtm);
     }
     
     

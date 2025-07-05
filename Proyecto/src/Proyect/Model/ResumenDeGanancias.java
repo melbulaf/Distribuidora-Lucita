@@ -12,6 +12,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author pc
@@ -25,7 +29,7 @@ public class ResumenDeGanancias {
 
     public static List<String> nombresDePedidos() {
     List<String> datosPedidosN = new ArrayList<>();
-    List<String> datosPedidosF = new ArrayList<>();
+    
 
     try (BufferedReader br = new BufferedReader(new FileReader("src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
         String linea;
@@ -40,6 +44,9 @@ public class ResumenDeGanancias {
         }
     } catch (IOException e) {
         e.printStackTrace();
+    }
+    for(String x : datosPedidosN){
+        
     }
 
     return datosPedidosN;
@@ -64,6 +71,27 @@ public class ResumenDeGanancias {
 
     return datosPedidosF;
 }
+    
+    public static void agregarProductosDeHoyATabla(DefaultTableModel dtm) {
+    String fechaHoy = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+
+    List<String> nombres = nombresDePedidos();
+    List<String> fechas = fechasDePedidos();
+
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechas.get(i).equals(fechaHoy)) {
+            Object[] fila = new Object[4];
+            fila[0] = nombres.get(i);
+            fila[1] = 100; // precio venta
+            fila[2] = 100; // precio compra
+            fila[3] = 100; // ganancia
+            dtm.insertRow(0, fila); // Insertar al inicio
+        }
+    }
 }
 
+
+
+
+}
 

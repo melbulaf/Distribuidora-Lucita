@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+import Proyect.Model.Inventario;
 
 /**
  *
@@ -72,6 +73,7 @@ public class ResumenDeGanancias {
     return datosPedidosF;
 }
     
+    
     public static void agregarProductosDeHoyATabla(DefaultTableModel dtm) {
     String fechaHoy = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
@@ -88,6 +90,8 @@ public class ResumenDeGanancias {
             dtm.insertRow(0, fila); // Insertar al inicio
         }
     }
+    
+    
 }
 
 

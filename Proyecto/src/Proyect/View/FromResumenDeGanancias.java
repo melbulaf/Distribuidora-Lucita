@@ -51,6 +51,10 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
         dtm3 =(DefaultTableModel)jTable4.getModel();
         
         ResumenDeGanancias.agregarProductosDeHoyATabla(dtm);
+        
+        
+        ResumenDeGanancias logica = new ResumenDeGanancias();
+        logica.cargarVentasDesdeArchivoTxt(jTable2,jTable4, jTable3,"C:\\Users\\pc\\Documents\\Distribuidora-Lucita\\Proyecto\\src\\Proyect\\Controler\\BD\\ResumenDeGanancias.txt");
     }
     
     
@@ -123,8 +127,6 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -212,10 +214,8 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane4)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())
-                    .addComponent(jScrollPane3)))
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,9 +241,9 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
                             .addComponent(jButton1))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,14 +269,18 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
         jTextField2.setText("");
         jTextField4.setText("");
         
-        try {
-    double valor1 = Double.parseDouble(jTextField2.getText());
-    double valor2 = Double.parseDouble(jTextField4.getText());
-    double resultado = valor1 * valor2;
-    l[0] = String.valueOf(resultado);
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(null, "Por favor ingrese números válidos");
-}
+        ResumenDeGanancias.calcularTotales(jTable2, jTable4, jTable3);
+        
+        ResumenDeGanancias logica = new ResumenDeGanancias();
+        logica.guardarVentasEnArchivoTxt(jTable2,jTable4, jTable3,"C:\\Users\\pc\\Documents\\Distribuidora-Lucita\\Proyecto\\src\\Proyect\\Controler\\BD\\ResumenDeGanancias.txt");
+        
+        
+
+
+
+
+
+        
 
         
         

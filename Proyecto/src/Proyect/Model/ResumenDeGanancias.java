@@ -186,6 +186,72 @@ public class ResumenDeGanancias {
     }
     return null;
 }
+    
+    
+    
+    
+    
+    
+    public static List<Double> calcularTotalVentas(List<String> nombresProductos) {
+    List<Double> preciosVenta = preciosVentaProductos(nombresProductos);
+    double total = 0.0;
+
+    for (Double precio : preciosVenta) {
+        if (precio != null) {
+            total += precio;
+        }
+    }
+
+    List<Double> totalLista = new ArrayList<>();
+    totalLista.add(total);
+    return totalLista;
+}
+
+
+
+    
+    
+    
+    public static void agregarProductostablaTotal(DefaultTableModel dtm2) {
+    List<Double> Total = calcularTotalVentas(nombresDePedidos());
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm2.insertRow(0, fila); 
+}
+    
+    
+    
+    
+    public static List<Double> utilidadNetaComoLista(List<String> nombresProductos) {
+    List<Double> totalVentas = calcularTotalVentas(nombresProductos);
+    double total = totalVentas.get(0); // Obtenemos el total de ventas
+    double utilidad = total * 0.15;    // Calculamos el 15%
+
+    List<Double> utilidadLista = new ArrayList<>();
+    utilidadLista.add(utilidad);
+    return utilidadLista;
+}
+
+    
+    
+    
+    
+    
+    
+    
+    public static void agregarProductostablaUtilidadNeta(DefaultTableModel dtm3) {
+    List<Double> Total = utilidadNetaComoLista(nombresDePedidos());
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm3.insertRow(0, fila); 
+}
+    
+    
+    
 
     
     

@@ -27,6 +27,8 @@ import javax.swing.JOptionPane;
 public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
     
     private DefaultTableModel dtm;
+    private DefaultTableModel dtm2;
+    private DefaultTableModel dtm3;
     
     private Object[] l = new Object[1];
     private Object[] p = new Object[3];
@@ -46,8 +48,12 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
         
         
         dtm =(DefaultTableModel)jTable1.getModel();
+        dtm2 =(DefaultTableModel)jTable4.getModel();
+        dtm3 =(DefaultTableModel)jTable3.getModel();
         
         ResumenDeGanancias.agregarProductosDeHoyATabla(dtm);
+        ResumenDeGanancias.agregarProductostablaTotal(dtm2);
+        ResumenDeGanancias.agregarProductostablaUtilidadNeta(dtm3);
         
         
     }

@@ -80,10 +80,10 @@
               <Table columnCount="6" rowCount="16">
                 <Column editable="true" title="Productos" type="java.lang.String"/>
                 <Column editable="true" title="Cliente" type="java.lang.Object"/>
-                <Column editable="true" title="Fecha" type="java.lang.Object"/>
+                <Column editable="true" title="Cantidad" type="java.lang.Object"/>
                 <Column editable="true" title="Precio de compra" type="java.lang.Object"/>
                 <Column editable="true" title="Precio de venta" type="java.lang.Object"/>
-                <Column editable="true" title="Ganancia" type="java.lang.Object"/>
+                <Column editable="true" title="Ingresos por productos" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

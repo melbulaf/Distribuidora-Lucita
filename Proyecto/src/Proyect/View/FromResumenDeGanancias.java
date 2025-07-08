@@ -99,7 +99,7 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Productos", "Cliente", "Fecha", "Precio de compra", "Precio de venta", "Ganancia"
+                "Productos", "Cliente", "Cantidad", "Precio de compra", "Precio de venta", "Ingresos por productos"
             }
         ) {
             Class[] types = new Class [] {

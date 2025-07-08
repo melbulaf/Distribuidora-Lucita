@@ -151,6 +151,49 @@ public class ResumenDeGanancias {
     return ganancias;
 }
     
+    public static List<Integer> cantidadTotalDeProductosVendidos() {
+    List<Integer> cantidades = new ArrayList<>();
+
+    try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\pc\\Documents\\Distribuidora-Lucita\\Proyecto\\src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
+        String linea;
+
+        while ((linea = br.readLine()) != null) {
+            String[] partes = linea.split(",");
+            if (partes.length >= 2) {
+                try {
+                    int cantidad = Integer.parseInt(partes[1].trim());
+                    cantidades.add(cantidad);
+                } catch (NumberFormatException e) {
+                    // Maneja la línea con formato incorrecto (opcional)
+                    System.err.println("Cantidad inválida en línea: " + linea);
+                }
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return cantidades;
+}
+    
+    
+    public static List<Double> ingresosPorProducto() {
+    List<String> nombresProductos = nombresDePedidos();
+    List<Double> preciosVenta = preciosVentaProductos(nombresProductos); 
+    List<Integer> cantidades = cantidadTotalDeProductosVendidos(); 
+
+    List<Double> ingresos = new ArrayList<>();
+
+    for (int i = 0; i < nombresProductos.size(); i++) {
+        double ingreso = preciosVenta.get(i) * cantidades.get(i);
+        ingresos.add(ingreso);
+    }
+
+    return ingresos;
+}
+
+    
+    
     public static void agregarProductosDeHoyATabla(DefaultTableModel dtm) {
     String fechaHoy = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
@@ -160,6 +203,8 @@ public class ResumenDeGanancias {
     List<Double> compra = preciosCompraProductos(nombres);
     List<Double> venta = preciosVentaProductos(nombres);
     List<Double> ganancia = calcularGanancias(venta,compra);
+    List<Integer> cantidad = cantidadTotalDeProductosVendidos();
+    List<Double> ingresosPorProducto = ingresosPorProducto();
     
 
     for (int i = 0; i < fechas.size(); i++) {
@@ -167,10 +212,10 @@ public class ResumenDeGanancias {
             Object[] fila = new Object[6];
             fila[0] = nombres.get(i);
             fila[1] = clientes.get(i); 
-            fila[2] =  fechas.get(i);
+            fila[2] = cantidad.get(i);
             fila[3] = compra.get(i);
             fila[4] = venta.get(i);
-            fila[5] = ganancia.get(i);
+            fila[5] = ingresosPorProducto.get(i);
             dtm.insertRow(0, fila); 
         }
     }
@@ -192,20 +237,19 @@ public class ResumenDeGanancias {
     
     
     
-    public static List<Double> calcularTotalVentas(List<String> nombresProductos) {
-    List<Double> preciosVenta = preciosVentaProductos(nombresProductos);
+    public static List<Double> calcularTotalIngresos() {
+    List<Double> ingresosIndividuales = ingresosPorProducto(); // método previamente definido
     double total = 0.0;
 
-    for (Double precio : preciosVenta) {
-        if (precio != null) {
-            total += precio;
-        }
+    for (double ingreso : ingresosIndividuales) {
+        total += ingreso;
     }
 
-    List<Double> totalLista = new ArrayList<>();
-    totalLista.add(total);
-    return totalLista;
+    List<Double> resultado = new ArrayList<>();
+    resultado.add(total);
+    return resultado;
 }
+
 
 
 
@@ -213,7 +257,7 @@ public class ResumenDeGanancias {
     
     
     public static void agregarProductostablaTotal(DefaultTableModel dtm2) {
-    List<Double> Total = calcularTotalVentas(nombresDePedidos());
+    List<Double> Total = calcularTotalIngresos();
     
             Object[] fila = new Object[1];
             fila[0] = Total.get(0);
@@ -225,7 +269,7 @@ public class ResumenDeGanancias {
     
     
     public static List<Double> utilidadNetaComoLista(List<String> nombresProductos) {
-    List<Double> totalVentas = calcularTotalVentas(nombresProductos);
+    List<Double> totalVentas = calcularTotalIngresos();
     double total = totalVentas.get(0); // Obtenemos el total de ventas
     double utilidad = total * 0.15;    // Calculamos el 15%
 

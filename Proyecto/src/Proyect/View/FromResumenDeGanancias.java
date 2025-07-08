@@ -72,12 +72,12 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
+        ganaciasPorDias = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,8 +112,6 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel3.setText("Ventas para hoy");
-
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null}
@@ -134,6 +132,13 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(jTable4);
 
+        ganaciasPorDias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ganancias de hoy", "Ganancias de cuatro días", "Ganancias de siete días", "Ganancias de quince días", "Ganancias de treinta días" }));
+        ganaciasPorDias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ganaciasPorDiasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,42 +147,105 @@ public class FromResumenDeGanancias extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5))
+                        .addComponent(ganaciasPorDias, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 738, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1)
+                                .addGap(6, 6, 6))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(ganaciasPorDias, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(497, 497, 497))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(45, Short.MAX_VALUE))))
+                        .addGap(15, 15, 15))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ganaciasPorDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ganaciasPorDiasActionPerformed
+        // TODO add your handling code here:
+        String diasGanancia = ganaciasPorDias.getSelectedItem().toString();
+        if(diasGanancia.equals("Ganancias de hoy")){
+            for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
+                dtm.removeRow(i);
+            }
+            dtm2.removeRow(0);
+            dtm3.removeRow(0);
+            ResumenDeGanancias.agregarProductosDeHoyATabla(dtm);
+            ResumenDeGanancias.agregarProductostablaTotal(dtm2);
+            ResumenDeGanancias.agregarProductostablaUtilidadNeta(dtm3);          
+        }
+        
+        else if(diasGanancia.equals("Ganancias de cuatro días")){
+            for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
+                dtm.removeRow(i);
+            }
+            dtm2.removeRow(0);
+            dtm3.removeRow(0);
+            ResumenDeGanancias.agregarProductosDe4(dtm);
+            ResumenDeGanancias.agregarProductostablaTotalDe4(dtm2);
+            ResumenDeGanancias.agregarProductostablaUtilidadNetaDe4(dtm3);           
+        }
+        else if (diasGanancia.equals("Ganancias de siete días")){
+            for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
+                dtm.removeRow(i);
+            }
+            dtm2.removeRow(0);
+            dtm3.removeRow(0);
+            ResumenDeGanancias.agregarProductosDe7(dtm);
+            ResumenDeGanancias.agregarProductostablaTotalDe7(dtm2);
+            ResumenDeGanancias.agregarProductostablaUtilidadNetaDe7(dtm3); 
+            
+        }
+        else if (diasGanancia.equals("Ganancias de quince días")){
+            for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
+                dtm.removeRow(i);
+            }
+            dtm2.removeRow(0);
+            dtm3.removeRow(0);
+            ResumenDeGanancias.agregarProductosDe15(dtm);
+            ResumenDeGanancias.agregarProductostablaTotalDe15(dtm2);
+            ResumenDeGanancias.agregarProductostablaUtilidadNetaDe15(dtm3); 
+            
+        }
+        else if (diasGanancia.equals("Ganancias de treinta días")){
+            for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
+                dtm.removeRow(i);
+            }
+            dtm2.removeRow(0);
+            dtm3.removeRow(0);
+            ResumenDeGanancias.agregarProductosDe30(dtm);
+            ResumenDeGanancias.agregarProductostablaTotalDe30(dtm2);
+            ResumenDeGanancias.agregarProductostablaUtilidadNetaDe30(dtm3); 
+            
+        }
+        
+        
+    }//GEN-LAST:event_ganaciasPorDiasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ganaciasPorDias;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;

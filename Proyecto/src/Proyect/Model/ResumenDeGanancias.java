@@ -3,31 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Proyect.Model;
-import java.util.ArrayList;
-import Proyect.Model.RegistrarPedido;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.table.DefaultTableModel;
-import Proyect.Model.Inventario;
-import javax.swing.JTable;
-
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+import java.util.Calendar;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
@@ -85,8 +71,6 @@ public class ResumenDeGanancias {
     return datosPedidosF;
 }
     
-    
-    
     public static List<String> clientesDePedidos() {
     List<String> datosClientes = new ArrayList<>();
 
@@ -137,19 +121,6 @@ public class ResumenDeGanancias {
     return preciosVenta;
 }
     
-    
-    public static List<Double> calcularGanancias(List<Double> preciosVenta, List<Double> preciosCompra) {
-    List<Double> ganancias = new ArrayList<>();
-
-    for (int i = 0; i < preciosVenta.size(); i++) {
-        double venta = preciosVenta.get(i);
-        double compra = preciosCompra.get(i);
-        double ganancia = venta - compra;
-        ganancias.add(ganancia);
-    }
-
-    return ganancias;
-}
     
     public static List<Integer> cantidadTotalDeProductosVendidos() {
     List<Integer> cantidades = new ArrayList<>();
@@ -202,7 +173,6 @@ public class ResumenDeGanancias {
     List<String> clientes = clientesDePedidos();
     List<Double> compra = preciosCompraProductos(nombres);
     List<Double> venta = preciosVentaProductos(nombres);
-    List<Double> ganancia = calcularGanancias(venta,compra);
     List<Integer> cantidad = cantidadTotalDeProductosVendidos();
     List<Double> ingresosPorProducto = ingresosPorProducto();
     
@@ -233,58 +203,45 @@ public class ResumenDeGanancias {
 }
     
     
+    //actualizar tabla para un dia
     
+    public static List<Double> calcularTotalIngresosDelDia() {
+    List<Double> ingresosIndividuales = ingresosPorProducto(); // método existente
+    List<String> fechas = fechasDePedidos(); // método que obtiene fechas
     
-    
-    
-    public static List<Double> calcularTotalIngresos() {
-    List<Double> ingresosIndividuales = ingresosPorProducto(); // método previamente definido
+    String fechaHoy = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     double total = 0.0;
 
-    for (double ingreso : ingresosIndividuales) {
-        total += ingreso;
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechas.get(i).equals(fechaHoy)) {
+            total += ingresosIndividuales.get(i);
+        }
     }
 
     List<Double> resultado = new ArrayList<>();
     resultado.add(total);
     return resultado;
-}
+    }
 
-
-
-
-    
-    
-    
     public static void agregarProductostablaTotal(DefaultTableModel dtm2) {
-    List<Double> Total = calcularTotalIngresos();
+    List<Double> Total = calcularTotalIngresosDelDia();
     
             Object[] fila = new Object[1];
             fila[0] = Total.get(0);
             
             dtm2.insertRow(0, fila); 
-}
-    
-    
-    
-    
+    }
+           
     public static List<Double> utilidadNetaComoLista(List<String> nombresProductos) {
-    List<Double> totalVentas = calcularTotalIngresos();
+    List<Double> totalVentas = calcularTotalIngresosDelDia();
     double total = totalVentas.get(0); // Obtenemos el total de ventas
     double utilidad = total * 0.15;    // Calculamos el 15%
 
     List<Double> utilidadLista = new ArrayList<>();
     utilidadLista.add(utilidad);
     return utilidadLista;
-}
+    }
 
-    
-    
-    
-    
-    
-    
-    
     public static void agregarProductostablaUtilidadNeta(DefaultTableModel dtm3) {
     List<Double> Total = utilidadNetaComoLista(nombresDePedidos());
     
@@ -292,14 +249,370 @@ public class ResumenDeGanancias {
             fila[0] = Total.get(0);
             
             dtm3.insertRow(0, fila); 
+    }
+    
+    
+    //actualizar tabla para cuatro dias
+    
+    public static void agregarProductosDe4(DefaultTableModel dtm) {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar calendar = Calendar.getInstance();
+    
+    // Generar lista con hoy + los próximos 3 días
+    List<String> fechasValidas = new ArrayList<>();
+    for (int i = 0; i < 4; i++) {
+        fechasValidas.add(sdf.format(calendar.getTime()));
+        calendar.add(Calendar.DATE, 1); // avanzar un día
+    }
+
+    List<String> nombres = nombresDePedidos();
+    List<String> fechas = fechasDePedidos();
+    List<String> clientes = clientesDePedidos();
+    List<Double> compra = preciosCompraProductos(nombres);
+    List<Double> venta = preciosVentaProductos(nombres);
+    List<Integer> cantidad = cantidadTotalDeProductosVendidos();
+    List<Double> ingresosPorProducto = ingresosPorProducto();
+
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechasValidas.contains(fechas.get(i))) {
+            Object[] fila = new Object[6];
+            fila[0] = nombres.get(i);
+            fila[1] = clientes.get(i);
+            fila[2] = cantidad.get(i);
+            fila[3] = compra.get(i);
+            fila[4] = venta.get(i);
+            fila[5] = ingresosPorProducto.get(i);
+            dtm.insertRow(0, fila);
+        }
+    }
 }
     
-    
-    
+    public static List<Double> calcularTotalIngresosProximosCuatroDias() {
+    List<Double> ingresosIndividuales = ingresosPorProducto(); // método ya existente
+    List<String> fechas = fechasDePedidos(); // lista de fechas de los pedidos
 
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar calHoy = Calendar.getInstance();
     
-    
-    
+    // Generar las 4 fechas: hoy + 3 días siguientes
+    Set<String> fechasValidas = new HashSet<>();
+    for (int i = 0; i < 4; i++) {
+        fechasValidas.add(sdf.format(calHoy.getTime()));
+        calHoy.add(Calendar.DAY_OF_MONTH, 1);
+    }
 
+    double total = 0.0;
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechasValidas.contains(fechas.get(i))) {
+            total += ingresosIndividuales.get(i);
+        }
+    }
+
+    List<Double> resultado = new ArrayList<>();
+    resultado.add(total);
+    return resultado;
+    }
+    
+    public static void agregarProductostablaTotalDe4(DefaultTableModel dtm2) {
+    List<Double> Total = calcularTotalIngresosProximosCuatroDias();
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm2.insertRow(0, fila); 
+    }
+    
+    public static List<Double> utilidadNetaComoListaDe4(List<String> nombresProductos) {
+    List<Double> totalVentas = calcularTotalIngresosProximosCuatroDias();
+    double total = totalVentas.get(0); // Obtenemos el total de ventas
+    double utilidad = total * 0.15;    // Calculamos el 15%
+
+    List<Double> utilidadLista = new ArrayList<>();
+    utilidadLista.add(utilidad);
+    return utilidadLista;
+    }
+    
+    public static void agregarProductostablaUtilidadNetaDe4(DefaultTableModel dtm3) {
+    List<Double> Total = utilidadNetaComoListaDe4(nombresDePedidos());
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm3.insertRow(0, fila); 
+    }
+    
+    
+    
+    //actualizar tabla para 7 dias
+    
+    public static void agregarProductosDe7(DefaultTableModel dtm) {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar calendar = Calendar.getInstance();
+    
+    // Generar lista con hoy + los próximos 3 días
+    List<String> fechasValidas = new ArrayList<>();
+    for (int i = 0; i < 7; i++) {
+        fechasValidas.add(sdf.format(calendar.getTime()));
+        calendar.add(Calendar.DATE, 1); // avanzar un día
+    }
+
+    List<String> nombres = nombresDePedidos();
+    List<String> fechas = fechasDePedidos();
+    List<String> clientes = clientesDePedidos();
+    List<Double> compra = preciosCompraProductos(nombres);
+    List<Double> venta = preciosVentaProductos(nombres);
+    List<Integer> cantidad = cantidadTotalDeProductosVendidos();
+    List<Double> ingresosPorProducto = ingresosPorProducto();
+
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechasValidas.contains(fechas.get(i))) {
+            Object[] fila = new Object[6];
+            fila[0] = nombres.get(i);
+            fila[1] = clientes.get(i);
+            fila[2] = cantidad.get(i);
+            fila[3] = compra.get(i);
+            fila[4] = venta.get(i);
+            fila[5] = ingresosPorProducto.get(i);
+            dtm.insertRow(0, fila);
+        }
+    }
+}
+    
+    public static List<Double> calcularTotalIngresosProximos7Dias() {
+    List<Double> ingresosIndividuales = ingresosPorProducto(); // método ya existente
+    List<String> fechas = fechasDePedidos(); // lista de fechas de los pedidos
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar calHoy = Calendar.getInstance();
+    
+    // Generar las 4 fechas: hoy + 3 días siguientes
+    Set<String> fechasValidas = new HashSet<>();
+    for (int i = 0; i < 7; i++) {
+        fechasValidas.add(sdf.format(calHoy.getTime()));
+        calHoy.add(Calendar.DAY_OF_MONTH, 1);
+    }
+
+    double total = 0.0;
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechasValidas.contains(fechas.get(i))) {
+            total += ingresosIndividuales.get(i);
+        }
+    }
+
+    List<Double> resultado = new ArrayList<>();
+    resultado.add(total);
+    return resultado;
+    }
+    
+    public static void agregarProductostablaTotalDe7(DefaultTableModel dtm2) {
+    List<Double> Total = calcularTotalIngresosProximos7Dias();
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm2.insertRow(0, fila); 
+    }
+    
+    public static List<Double> utilidadNetaComoListaDe7(List<String> nombresProductos) {
+    List<Double> totalVentas = calcularTotalIngresosProximos7Dias();
+    double total = totalVentas.get(0); // Obtenemos el total de ventas
+    double utilidad = total * 0.15;    // Calculamos el 15%
+
+    List<Double> utilidadLista = new ArrayList<>();
+    utilidadLista.add(utilidad);
+    return utilidadLista;
+    }
+    
+    public static void agregarProductostablaUtilidadNetaDe7(DefaultTableModel dtm3) {
+    List<Double> Total = utilidadNetaComoListaDe7(nombresDePedidos());
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm3.insertRow(0, fila); 
+    }
+    
+    
+    //actualizar tabla para 15 dias
+    
+    
+    public static void agregarProductosDe15(DefaultTableModel dtm) {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar calendar = Calendar.getInstance();
+    
+    // Generar lista con 15 días
+    List<String> fechasValidas = new ArrayList<>();
+    for (int i = 0; i < 15; i++) {
+        fechasValidas.add(sdf.format(calendar.getTime()));
+        calendar.add(Calendar.DATE, 1); // avanzar un día
+    }
+
+    List<String> nombres = nombresDePedidos();
+    List<String> fechas = fechasDePedidos();
+    List<String> clientes = clientesDePedidos();
+    List<Double> compra = preciosCompraProductos(nombres);
+    List<Double> venta = preciosVentaProductos(nombres);
+    List<Integer> cantidad = cantidadTotalDeProductosVendidos();
+    List<Double> ingresosPorProducto = ingresosPorProducto();
+
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechasValidas.contains(fechas.get(i))) {
+            Object[] fila = new Object[6];
+            fila[0] = nombres.get(i);
+            fila[1] = clientes.get(i);
+            fila[2] = cantidad.get(i);
+            fila[3] = compra.get(i);
+            fila[4] = venta.get(i);
+            fila[5] = ingresosPorProducto.get(i);
+            dtm.insertRow(0, fila);
+        }
+    }
+}
+    
+    public static List<Double> calcularTotalIngresosProximos15Dias() {
+    List<Double> ingresosIndividuales = ingresosPorProducto(); 
+    List<String> fechas = fechasDePedidos(); 
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar calHoy = Calendar.getInstance();
+    
+    // Generar las 4 fechas: hoy + 3 días siguientes
+    Set<String> fechasValidas = new HashSet<>();
+    for (int i = 0; i < 15; i++) {
+        fechasValidas.add(sdf.format(calHoy.getTime()));
+        calHoy.add(Calendar.DAY_OF_MONTH, 1);
+    }
+
+    double total = 0.0;
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechasValidas.contains(fechas.get(i))) {
+            total += ingresosIndividuales.get(i);
+        }
+    }
+
+    List<Double> resultado = new ArrayList<>();
+    resultado.add(total);
+    return resultado;
+    }
+    
+    public static void agregarProductostablaTotalDe15(DefaultTableModel dtm2) {
+    List<Double> Total = calcularTotalIngresosProximos15Dias();
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm2.insertRow(0, fila); 
+    }
+    
+    public static List<Double> utilidadNetaComoListaDe15(List<String> nombresProductos) {
+    List<Double> totalVentas = calcularTotalIngresosProximos15Dias();
+    double total = totalVentas.get(0); // Obtenemos el total de ventas
+    double utilidad = total * 0.15;    // Calculamos el 15%
+
+    List<Double> utilidadLista = new ArrayList<>();
+    utilidadLista.add(utilidad);
+    return utilidadLista;
+    }
+    
+    public static void agregarProductostablaUtilidadNetaDe15(DefaultTableModel dtm3) {
+    List<Double> Total = utilidadNetaComoListaDe15(nombresDePedidos());
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm3.insertRow(0, fila); 
+    }
+    
+    
+    //actualizar tabla para 30 dias
+    
+    public static void agregarProductosDe30(DefaultTableModel dtm) {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar calendar = Calendar.getInstance();
+    
+    // Generar lista próximos 30 días
+    List<String> fechasValidas = new ArrayList<>();
+    for (int i = 0; i < 30; i++) {
+        fechasValidas.add(sdf.format(calendar.getTime()));
+        calendar.add(Calendar.DATE, 1); // avanzar un día
+    }
+
+    List<String> nombres = nombresDePedidos();
+    List<String> fechas = fechasDePedidos();
+    List<String> clientes = clientesDePedidos();
+    List<Double> compra = preciosCompraProductos(nombres);
+    List<Double> venta = preciosVentaProductos(nombres);
+    List<Integer> cantidad = cantidadTotalDeProductosVendidos();
+    List<Double> ingresosPorProducto = ingresosPorProducto();
+
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechasValidas.contains(fechas.get(i))) {
+            Object[] fila = new Object[6];
+            fila[0] = nombres.get(i);
+            fila[1] = clientes.get(i);
+            fila[2] = cantidad.get(i);
+            fila[3] = compra.get(i);
+            fila[4] = venta.get(i);
+            fila[5] = ingresosPorProducto.get(i);
+            dtm.insertRow(0, fila);
+        }
+    }
+}
+    
+    public static List<Double> calcularTotalIngresosProximos30Dias() {
+    List<Double> ingresosIndividuales = ingresosPorProducto(); 
+    List<String> fechas = fechasDePedidos(); 
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Calendar calHoy = Calendar.getInstance();
+    
+    // Generar las 4 fechas: hoy + 3 días siguientes
+    Set<String> fechasValidas = new HashSet<>();
+    for (int i = 0; i < 30; i++) {
+        fechasValidas.add(sdf.format(calHoy.getTime()));
+        calHoy.add(Calendar.DAY_OF_MONTH, 1);
+    }
+
+    double total = 0.0;
+    for (int i = 0; i < fechas.size(); i++) {
+        if (fechasValidas.contains(fechas.get(i))) {
+            total += ingresosIndividuales.get(i);
+        }
+    }
+
+    List<Double> resultado = new ArrayList<>();
+    resultado.add(total);
+    return resultado;
+    }
+    
+    public static void agregarProductostablaTotalDe30(DefaultTableModel dtm2) {
+    List<Double> Total = calcularTotalIngresosProximos30Dias();
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm2.insertRow(0, fila); 
+    }
+    
+    public static List<Double> utilidadNetaComoListaDe30(List<String> nombresProductos) {
+    List<Double> totalVentas = calcularTotalIngresosProximos30Dias();
+    double total = totalVentas.get(0); // Obtenemos el total de ventas
+    double utilidad = total * 0.15;    // Calculamos el 15%
+
+    List<Double> utilidadLista = new ArrayList<>();
+    utilidadLista.add(utilidad);
+    return utilidadLista;
+    }
+    
+    public static void agregarProductostablaUtilidadNetaDe30(DefaultTableModel dtm3) {
+    List<Double> Total = utilidadNetaComoListaDe30(nombresDePedidos());
+    
+            Object[] fila = new Object[1];
+            fila[0] = Total.get(0);
+            
+            dtm3.insertRow(0, fila); 
+    }
+    
+    
 }
 

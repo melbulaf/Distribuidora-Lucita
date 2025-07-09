@@ -30,7 +30,7 @@ public class ResumenDeGanancias {
     List<String> datosPedidosN = new ArrayList<>();
     
 
-    try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\pc\\Documents\\Distribuidora-Lucita\\Proyecto\\src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
         String linea;
         while ((linea = br.readLine()) != null) {
             String[] partes = linea.split(",");
@@ -54,7 +54,7 @@ public class ResumenDeGanancias {
     public static List<String> fechasDePedidos(){
     List<String> datosPedidosF = new ArrayList<>();
 
-    try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\pc\\Documents\\Distribuidora-Lucita\\Proyecto\\src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
         String linea;
         while ((linea = br.readLine()) != null) {
             String[] partes = linea.split(",");
@@ -74,7 +74,7 @@ public class ResumenDeGanancias {
     public static List<String> clientesDePedidos() {
     List<String> datosClientes = new ArrayList<>();
 
-    try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\pc\\Documents\\Distribuidora-Lucita\\Proyecto\\src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
         String linea;
         while ((linea = br.readLine()) != null) {
             String[] partes = linea.split(",");
@@ -125,7 +125,7 @@ public class ResumenDeGanancias {
     public static List<Integer> cantidadTotalDeProductosVendidos() {
     List<Integer> cantidades = new ArrayList<>();
 
-    try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\pc\\Documents\\Distribuidora-Lucita\\Proyecto\\src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("src\\Proyect\\Controler\\BD\\RegistrarPedido.txt"))) {
         String linea;
 
         while ((linea = br.readLine()) != null) {

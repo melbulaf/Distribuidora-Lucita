@@ -83,7 +83,7 @@ public class RegistrarPedido {
     
     }
     public static void guardarCR() {
-    File archivoCompras = new File("C:\\Users\\pc\\Documents\\Distribuidora-Lucita\\Proyecto\\src\\Proyect\\Controler\\BD\\RegistrarPedido.txt");
+    File archivoCompras = new File("src\\Proyect\\Controler\\BD\\RegistrarPedido.txt");
     try {
         PrintWriter salida = new PrintWriter(archivoCompras);
         for (int i = listaDePedidos.size() - 1; i >= 0; i--) {
@@ -103,7 +103,7 @@ public class RegistrarPedido {
 
     
     public static void cargarCR() {
-    File archivoCompras = new File("C:\\Users\\pc\\Documents\\Distribuidora-Lucita\\Proyecto\\src\\Proyect\\Controler\\BD\\RegistrarPedido.txt");
+    File archivoCompras = new File("src\\Proyect\\Controler\\BD\\RegistrarPedido.txt");
     try {
         BufferedReader leer = new BufferedReader(new FileReader(archivoCompras));
         listaDePedidos.clear();  // Limpiamos la lista antes de cargar nuevos datos

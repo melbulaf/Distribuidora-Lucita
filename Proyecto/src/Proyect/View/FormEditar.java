@@ -1,7 +1,6 @@
 package Proyect.View;
 
 import Proyect.Model.Producto;
-import Proyect.Model.Editar;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -190,7 +189,7 @@ public class FormEditar extends javax.swing.JPanel {
 
     private void ActualizarpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarpActionPerformed
         String entrada = CodigoNombre.getText().trim();
-        Producto p = Editar.buscarProducto(entrada);
+        Producto p = Producto.buscarProducto(entrada);
         String atributo = (String) jComboBox1.getSelectedItem();
         String nuevoValor = jTextNuevovalor.getText().trim();
 
@@ -204,7 +203,7 @@ public class FormEditar extends javax.swing.JPanel {
             return;
         }
 
-        boolean ok = Editar.actualizarProducto(p, atributo, nuevoValor);
+        boolean ok = Producto.actualizarProducto(p, atributo, nuevoValor);
         if (ok) {
             JOptionPane.showMessageDialog(this, "Se actualizo " + atributo + " correctamente.");
             if (atributo.equalsIgnoreCase("nombre")) {
@@ -219,9 +218,9 @@ public class FormEditar extends javax.swing.JPanel {
 
     private void EliminarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarPActionPerformed
         String entrada = CodigoNombre.getText().trim();
-        Producto p = Editar.buscarProducto(entrada);
+        Producto p = Producto.buscarProducto(entrada);
 
-        if (p != null && Editar.eliminarProducto(p)) {
+        if (p != null && Producto.eliminarProducto(p)) {
             JOptionPane.showMessageDialog(this, "Producto eliminado exitosamente.");
             DefaultTableModel modelo = (DefaultTableModel) jTablaProducto.getModel();
             modelo.setRowCount(0);
@@ -232,7 +231,7 @@ public class FormEditar extends javax.swing.JPanel {
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
         String entrada = CodigoNombre.getText().trim();
-        Producto p = Editar.buscarProducto(entrada);
+        Producto p = Producto.buscarProducto(entrada);
 
         DefaultTableModel modelo = (DefaultTableModel) jTablaProducto.getModel();
         modelo.setRowCount(0);

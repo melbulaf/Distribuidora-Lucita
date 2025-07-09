@@ -15,6 +15,9 @@ import Proyect.View.FormHistoriaCompra;
 import Proyect.View.FormProducto;
 import Proyect.Model.Ruta;
 import java.util.ArrayList;
+import Proyect.Model.RegistrarPedido;
+import Proyect.Model.ResumenDeGanancias;
+
 
 public class Inicio extends javax.swing.JFrame {
     // === VARIABLES GLOBALES ===
@@ -26,7 +29,9 @@ public class Inicio extends javax.swing.JFrame {
     private FormRegistrarPedido objFormPedido;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
-
+    private FormRegistroCliente objFormRegistroCliente;
+    private javax.swing.JInternalFrame jifFormRegistroCliente;
+    
     
     // === CONSTRUCTOR ===
     public Inicio() {
@@ -102,6 +107,16 @@ public class Inicio extends javax.swing.JFrame {
         jifFormPedido.setSize(870,500);
         jifFormPedido.setVisible(false);
         
+        //Registrar Cliente
+        jifFormRegistroCliente = new javax.swing.JInternalFrame("Registro de Cliente", true, true, true, true);
+        objFormRegistroCliente = new FormRegistroCliente();
+        jifFormRegistroCliente.setContentPane(objFormRegistroCliente);
+        jifFormRegistroCliente.setSize(800, 480);
+        jifFormRegistroCliente.setVisible(false);
+        desktopPane.add(jifFormRegistroCliente);
+
+        
+        
     }
     //Metodo para centrar los Internal FrameAdd commentMore actions
     private void centrarInternalFrame(javax.swing.JInternalFrame frame) {
@@ -135,9 +150,11 @@ public class Inicio extends javax.swing.JFrame {
         InventarioMenuItem = new javax.swing.JMenuItem();
         Compras = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        RegistrarCliente = new javax.swing.JMenuItem();
         menuItemNuevoProducto = new javax.swing.JMenuItem();
         MEditar = new javax.swing.JMenuItem();
         menuItemRutaDelDia = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         salirMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -227,7 +244,6 @@ public class Inicio extends javax.swing.JFrame {
         desktopPane.add(jifFormNProducto);
         jifFormNProducto.setBounds(50, 0, 630, 510);
 
-        fileMenu.setMnemonic('f');
         fileMenu.setText("Archivo");
         fileMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +251,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        InventarioMenuItem.setMnemonic('o');
         InventarioMenuItem.setText("Inventario");
         InventarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,6 +274,14 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         fileMenu.add(jMenuItem1);
+
+        RegistrarCliente.setText("Registro cliente");
+        RegistrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarClienteActionPerformed(evt);
+            }
+        });
+        fileMenu.add(RegistrarCliente);
 
         menuItemNuevoProducto.setText("Nuevo producto");
         menuItemNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +307,14 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(menuItemRutaDelDia);
 
-        salirMenuItem.setMnemonic('x');
+        jMenuItem2.setText("Resumen de ganancias");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem2);
+
         salirMenuItem.setText("Salir");
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,15 +465,47 @@ public class Inicio extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_menuItemRutaDelDiaActionPerformed
 
+    private void RegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarClienteActionPerformed
+    if (jifFormRegistroCliente == null || jifFormRegistroCliente.isClosed()) {
+        objFormRegistroCliente = new FormRegistroCliente();
+        jifFormRegistroCliente = new javax.swing.JInternalFrame("Registro de Cliente", true, true, true, true);
+        jifFormRegistroCliente.setContentPane(objFormRegistroCliente);
+        jifFormRegistroCliente.setSize(800, 480);
+        objFormRegistroCliente.setSize(800, 480);
+        desktopPane.add(jifFormRegistroCliente);
+        jifFormRegistroCliente.setVisible(true);
+        centrarInternalFrame(jifFormRegistroCliente);
+    } else {
+        jifFormRegistroCliente.setVisible(true);
+        centrarInternalFrame(jifFormRegistroCliente);
+        jifFormRegistroCliente.toFront();
+        try {
+            jifFormRegistroCliente.setSelected(true);
+        } catch (java.beans.PropertyVetoException ex) {}
+    }
+    }//GEN-LAST:event_RegistrarClienteActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        FromResumenDeGanancias a = new FromResumenDeGanancias();
+        desktopPane.add(a);
+        a.setVisible(true);
+      
+       
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Compras;
     private javax.swing.JMenuItem InventarioMenuItem;
     private javax.swing.JMenuItem MEditar;
+    private javax.swing.JMenuItem RegistrarCliente;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JInternalFrame jifFormEditar;
     private javax.swing.JInternalFrame jifFormHCompras;
     private javax.swing.JInternalFrame jifFormInventario;

@@ -10,8 +10,8 @@
 package Proyect.Model;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class Producto {
 
@@ -34,9 +34,7 @@ public class Producto {
         this.precio = precio;
         this.precioC = precioC;
         this.cantidad = 0; // Por defecto el producto inicia sin existencias
-        // Agrega el producto a la lista
         Inventario.getInstancia().agregarProducto(this);
-        // Guarda los productos en el archivo
         guardarProductos();
     }
 
@@ -52,75 +50,161 @@ public class Producto {
         guardarProductos();
     }
 
-    // Constructor auxiliar usado para buscar o comparar productos por nombre o código
+    // Constructor auxiliar para búsqueda
     public Producto(String nombre, int codigo) {
         this.nombre = nombre;
-        this.codigo = contador++;
+        this.codigo = codigo;
     }
-    
-    private Producto(int codigo, String nombre, String categoria, double precio, double precioC, int cantidad) {
-    this.codigo = contador++;
-    this.nombre = nombre;
-    this.categoria = categoria;
-    this.precio = precio;
-    this.precioC = precioC;
-    this.cantidad = cantidad;
-}
 
-    // Devuelve el código del producto
+    // Constructor privado para carga desde archivo
+    private Producto(int codigo, String nombre, String categoria, double precio, double precioC, int cantidad) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.precio = precio;
+        this.precioC = precioC;
+        this.cantidad = cantidad;
+    }
+
     public int getCodigo() {
         return this.codigo;
     }
 
-    // Guarda todos los productos actuales en el archivo de texto
-    public static void guardarProductos() {
-        try {
-            
-            // Archivo de texto que actúa como base de datos local
-            File archivoProductos = new File("src\\Proyect\\Controler\\BD\\Nproductos.txt");
-            // Si el archivo no existe, se crea junto a sus carpetas padre
-            if (!archivoProductos.exists()) {
-                archivoProductos.getParentFile().mkdirs();
-                archivoProductos.createNewFile();
-            }
-
-            // Escribe cada producto en el archivo en formato CSV
-            PrintWriter salida = new PrintWriter(new FileWriter(archivoProductos));
-            for (Producto p : Inventario.getInstancia().obtenerProductos()) {
-                salida.println(p.codigo + "," + p.nombre + "," + p.categoria + "," + p.precio + "," + p.precioC + "," + p.cantidad);
-            }
-            salida.close();
-
-        } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-        }
-    }
-    
     public void setCantidad(int c) {
         this.cantidad = c;
     }
 
-    // Carga los productos desde el archivo y los agrega a la lista y al inventario
+    // === Funciones heredadas de la antigua clase Editar ===
+
+    // Buscar producto por código o nombre (ignorando mayúsculas)
+    public static Producto buscarProducto(String entrada) {
+        for (Producto p : Inventario.getInstancia().obtenerProductos()) {
+            if (String.valueOf(p.getCodigo()).equals(entrada)
+             || p.nombre.equalsIgnoreCase(entrada)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    // Actualiza un único atributo del producto
+    public static boolean actualizarProducto(Producto p, String atributo, String nuevoValor) {
+        try {
+            switch (atributo.trim().toLowerCase()) {
+                case "nombre":
+                    p.nombre = nuevoValor;
+                    break;
+
+                case "cantidad":
+                    int cantidad = Integer.parseInt(nuevoValor);
+                    if (cantidad <= 0) {
+                        JOptionPane.showMessageDialog(null,
+                            "La cantidad debe ser mayor que cero.",
+                            "Valor inválido", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                    p.cantidad = cantidad;
+                    break;
+
+                case "categoría":
+                    if (!nuevoValor.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+                        JOptionPane.showMessageDialog(null,
+                            "La categoría debe contener solo letras (sin números ni símbolos).",
+                            "Categoría inválida", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                    p.categoria = nuevoValor;
+                    break;
+
+                case "precio de compra":
+                    double precioC = Double.parseDouble(nuevoValor);
+                    if (precioC <= 0) {
+                        JOptionPane.showMessageDialog(null,
+                            "El precio de compra debe ser mayor que cero.",
+                            "Valor inválido", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                    p.precioC = precioC;
+                    break;
+
+                case "precio de venta":
+                    double precioV = Double.parseDouble(nuevoValor);
+                    if (precioV <= 0) {
+                        JOptionPane.showMessageDialog(null,
+                            "El precio de venta debe ser mayor que cero.",
+                            "Valor inválido", JOptionPane.WARNING_MESSAGE);
+                        return false;
+                    }
+                    p.precio = precioV;
+                    break;
+
+                default:
+                    System.out.println("Atributo no reconocido: '" + atributo + "'");
+                    return false;
+            }
+
+            guardarProductos(); // Guarda cambios
+            return true;
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null,
+                "Valor numérico inválido para " + atributo + ": " + nuevoValor,
+                "Error de formato", JOptionPane.ERROR_MESSAGE);
+            return false;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Elimina un producto de la lista
+    public static boolean eliminarProducto(Producto p) {
+        boolean eliminado = Inventario.getInstancia().obtenerProductos().remove(p);
+        if (eliminado) {
+            guardarProductos();
+        }
+        return eliminado;
+    }
+
+    // === Persistencia ===
+
+    public static void guardarProductos() {
+        try {
+            File archivo = new File("src\\Proyect\\Controler\\BD\\Nproductos.txt");
+            if (!archivo.exists()) {
+                archivo.getParentFile().mkdirs();
+                archivo.createNewFile();
+            }
+
+            PrintWriter salida = new PrintWriter(new FileWriter(archivo));
+            for (Producto p : Inventario.getInstancia().obtenerProductos()) {
+                salida.println(p.codigo + "%%" + p.nombre + "%%" + p.categoria + "%%" + p.precio + "%%" + p.precioC + "%%" + p.cantidad);
+            }
+            salida.close();
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }
+    }
+
     public static void cargarProductos() {
         try {
-            
-            // Archivo de texto que actúa como base de datos local
-            File archivoProductos = new File("src\\Proyect\\Controler\\BD\\Nproductos.txt");
-            // Si el archivo no existe, se crea vacío
-            if (!archivoProductos.exists()) {
-                archivoProductos.getParentFile().mkdirs();
-                archivoProductos.createNewFile();
+            File archivo = new File("src\\Proyect\\Controler\\BD\\Nproductos.txt");
+            if (!archivo.exists()) {
+                archivo.getParentFile().mkdirs();
+                archivo.createNewFile();
                 return;
             }
 
-            BufferedReader lector = new BufferedReader(new FileReader(archivoProductos));
+            BufferedReader lector = new BufferedReader(new FileReader(archivo));
             String linea;
-            Inventario.getInstancia().obtenerProductos().clear(); // Limpia la lista antes de cargar
+            List<Producto> productos = Inventario.getInstancia().obtenerProductos();
+            productos.clear(); // Limpia antes de cargar
 
             while ((linea = lector.readLine()) != null) {
-                String[] partes = linea.split(",");
+                String[] partes = linea.split("%%");
 
-                if (partes.length == 6) { // Asegura que la línea tiene todos los datos
+                if (partes.length == 6) {
                     int codigo = Integer.parseInt(partes[0]);
                     String nombre = partes[1];
                     String categoria = partes[2];
@@ -128,25 +212,21 @@ public class Producto {
                     double precioC = Double.parseDouble(partes[4]);
                     int cantidad = Integer.parseInt(partes[5]);
 
-                    // Valida si el producto ya existe para evitar duplicados
                     if (existeProducto(nombre)) {
-                        System.out.println("Producto" + nombre + "duplicado");
+                        System.out.println("Producto " + nombre + " duplicado");
                     }
-                    // Crea el producto usando el constructor especial para carga
+
                     Producto p = new Producto(codigo, nombre, categoria, precio, precioC, cantidad);
-                    Inventario.getInstancia().agregarProducto(p);
+                    productos.add(p);
                 }
             }
 
-            // Asegura que el próximo producto tenga un código único
             lector.close();
-
         } catch (IOException ex) {
             ex.printStackTrace(System.out);
         }
     }
 
-    // Verifica si un producto con el mismo nombre ya existe (ignorando mayúsculas)
     public static boolean existeProducto(String nombre) {
         for (Producto p : Inventario.getInstancia().obtenerProductos()) {
             if (p.nombre.equalsIgnoreCase(nombre)) {
@@ -155,6 +235,4 @@ public class Producto {
         }
         return false;
     }
-
-    
 }

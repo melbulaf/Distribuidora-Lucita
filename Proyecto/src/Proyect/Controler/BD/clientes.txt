@@ -1,0 +1,8 @@
+Ana%%López%%3011111111%%ana.lopez@email.com%%Calle 12 #45-23%%false
+Pedro%%Ruiz%%3022222222%%pedro.ruiz@email.com%%Edificio Oasis, apt 303%%true
+Carlos%%Méndez%%3033333333%%carlos.mendez@email.com%%Av. Libertad 100%%false
+Lucía%%Vargas%%3044444444%%lucia.vargas@email.com%%Residencial El Lago, Torre B%%true
+María%%Torres%%3055555555%%maria.torres@email.com%%Cra 20 #10-15%%false
+Sofía%%Herrera%%3066666666%%sofia.herrera@email.com%%Barrio Jardines, Calle 8%%true
+Luis%%Gómez%%3077777777%%luis.gomez@email.com%%Barrio Nuevo, Casa 8%%false
+Miguel%%Pardo%%3088888888%%miguel.pardo@email.com%%Carrera 7 #55-11%%true

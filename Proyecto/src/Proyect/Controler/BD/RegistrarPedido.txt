@@ -1,12 +1,25 @@
-Pan,1,Melu,25/06/2025
-Queso,5,Sofía Herrera - Barrio Jardines. Calle 8,25/06/2025
-Arroz,1,Mel,25/06/2025
-Huevos,5,Miguel Pardo - Carrera 7 #55-11,27/06/2025
-Huevos,10,Luis Gómez - Barrio Nuevo.Casa 8,30/06/2025
-Queso,5,Sofía Herrera - Barrio Jardines. Calle 8,30/06/2025
-Queso,10,María Torres - Cra 20 #10-15,25/06/2025
-Leche,5,Lucía Vargas - Residencial El Lago. Torre B,30/06/2025
-Leche,10,Carlos Méndez - Av. Libertad 100,01/07/2025
-Pan,5,Pedro Ruiz - Edificio Oasis. apt 303,30/06/2025
-Pan,10,Ana López - Calle 12 #45-23,30/06/2025
-Galletas,10,paco,26/06/2025
+Galletas,12,Juan Pérez,08/07/2025
+Huevos,8,Ana Gómez,09/07/2025
+Pan,15,Carlos Ruiz,10/07/2025
+Queso,7,Lina Torres,11/07/2025
+Arroz,10,Sofía Martínez,12/07/2025
+Galletas,14,Mario López,13/07/2025
+Huevos,11,Sandra Díaz,14/07/2025
+Pan,9,Julián Vargas,15/07/2025
+Queso,6,Daniela Ríos,16/07/2025
+Arroz,13,José Castillo,17/07/2025
+Galletas,10,Natalia Muñoz,18/07/2025
+Huevos,12,Pedro Salazar,19/07/2025
+Pan,8,Mónica Herrera,20/07/2025
+Queso,9,Camilo León,21/07/2025
+Arroz,11,Patricia Ramírez,22/07/2025
+Galletas,13,Laura Méndez,23/07/2025
+Huevos,7,Fernando Cruz,24/07/2025
+Pan,10,Andrea Peña,25/07/2025
+Queso,5,Nicolás Rojas,26/07/2025
+Arroz,14,Santiago Torres,27/07/2025
+Galletas,9,Valentina Soto,28/08/2025
+Huevos,16,Sebastián Orozco,29/08/2025
+Pan,12,Esteban Parra,30/08/2025
+Queso,10,Carolina Duarte,31/08/2025
+Arroz,13,Ricardo Mejía,07/08/2025

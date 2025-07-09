@@ -1,3 +1,6 @@
+Galleta Cuca,0,juan,12/07/2025
+Queso,5,Sofía Herrera - Barrio Jardines, Calle 8,09/07/2025
+Queso,10,María Torres - Cra 20 #10-15,09/07/2025
 Galletas,12,Juan Pérez,08/07/2025
 Huevos,8,Ana Gómez,09/07/2025
 Pan,15,Carlos Ruiz,10/07/2025

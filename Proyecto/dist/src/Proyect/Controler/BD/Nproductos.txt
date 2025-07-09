@@ -1,0 +1,4 @@
+1000,Pan,Alimentos,1000.0,800.0,50
+1001,Leche,Alimentos,1000.0,800.0,50
+1002,Queso,Alimentos,1000.0,800.0,50
+1003,Huevos,Alimentos,1000.0,800.0,50

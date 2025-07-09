@@ -29,9 +29,15 @@ public class Inicio extends javax.swing.JFrame {
     private FormRegistrarPedido objFormPedido;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
+<<<<<<< HEAD
     private FormRegistroCliente objFormRegistroCliente;
     private javax.swing.JInternalFrame jifFormRegistroCliente;
     
+=======
+    
+    
+
+>>>>>>> 41a9f57aeb74eff43c99e51d277d5787c916f9eb
     
     // === CONSTRUCTOR ===
     public Inicio() {
@@ -315,6 +321,10 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(jMenuItem2);
 
+<<<<<<< HEAD
+=======
+        salirMenuItem.setMnemonic('x');
+>>>>>>> 41a9f57aeb74eff43c99e51d277d5787c916f9eb
         salirMenuItem.setText("Salir");
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -465,6 +475,7 @@ public class Inicio extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_menuItemRutaDelDiaActionPerformed
 
+<<<<<<< HEAD
     private void RegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarClienteActionPerformed
     if (jifFormRegistroCliente == null || jifFormRegistroCliente.isClosed()) {
         objFormRegistroCliente = new FormRegistroCliente();
@@ -485,6 +496,8 @@ public class Inicio extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_RegistrarClienteActionPerformed
 
+=======
+>>>>>>> 41a9f57aeb74eff43c99e51d277d5787c916f9eb
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         FromResumenDeGanancias a = new FromResumenDeGanancias();

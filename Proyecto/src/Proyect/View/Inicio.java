@@ -29,15 +29,9 @@ public class Inicio extends javax.swing.JFrame {
     private FormRegistrarPedido objFormPedido;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
-<<<<<<< HEAD
     private FormRegistroCliente objFormRegistroCliente;
     private javax.swing.JInternalFrame jifFormRegistroCliente;
     
-=======
-    
-    
-
->>>>>>> 41a9f57aeb74eff43c99e51d277d5787c916f9eb
     
     // === CONSTRUCTOR ===
     public Inicio() {
@@ -158,7 +152,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         RegistrarCliente = new javax.swing.JMenuItem();
         menuItemNuevoProducto = new javax.swing.JMenuItem();
-        MEditar = new javax.swing.JMenuItem();
+        MEditarP = new javax.swing.JMenuItem();
         menuItemRutaDelDia = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         salirMenuItem = new javax.swing.JMenuItem();
@@ -250,6 +244,7 @@ public class Inicio extends javax.swing.JFrame {
         desktopPane.add(jifFormNProducto);
         jifFormNProducto.setBounds(50, 0, 630, 510);
 
+        fileMenu.setMnemonic('f');
         fileMenu.setText("Archivo");
         fileMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,6 +252,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        InventarioMenuItem.setMnemonic('o');
         InventarioMenuItem.setText("Inventario");
         InventarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,13 +293,13 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(menuItemNuevoProducto);
 
-        MEditar.setText("Editar");
-        MEditar.addActionListener(new java.awt.event.ActionListener() {
+        MEditarP.setText("Editar producto");
+        MEditarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MEditarActionPerformed(evt);
+                MEditarPActionPerformed(evt);
             }
         });
-        fileMenu.add(MEditar);
+        fileMenu.add(MEditarP);
 
         menuItemRutaDelDia.setText("Ruta del Dia");
         menuItemRutaDelDia.addActionListener(new java.awt.event.ActionListener() {
@@ -321,10 +317,7 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(jMenuItem2);
 
-<<<<<<< HEAD
-=======
         salirMenuItem.setMnemonic('x');
->>>>>>> 41a9f57aeb74eff43c99e51d277d5787c916f9eb
         salirMenuItem.setText("Salir");
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -437,7 +430,7 @@ public class Inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuItemNuevoProductoActionPerformed
 
-    private void MEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEditarActionPerformed
+    private void MEditarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEditarPActionPerformed
         if (jifFormEditar == null || jifFormEditar.isClosed()) {
             objFormEditar = new FormEditar();
             jifFormEditar = new javax.swing.JInternalFrame("Editar Producto", true, true, true, true);
@@ -454,7 +447,7 @@ public class Inicio extends javax.swing.JFrame {
                 jifFormEditar.setSelected(true);
             } catch (java.beans.PropertyVetoException ex) {}
         }
-    }//GEN-LAST:event_MEditarActionPerformed
+    }//GEN-LAST:event_MEditarPActionPerformed
 
     private void menuItemRutaDelDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRutaDelDiaActionPerformed
         if (jifFormRutas == null || jifFormRutas.isClosed()) {
@@ -475,7 +468,6 @@ public class Inicio extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_menuItemRutaDelDiaActionPerformed
 
-<<<<<<< HEAD
     private void RegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarClienteActionPerformed
     if (jifFormRegistroCliente == null || jifFormRegistroCliente.isClosed()) {
         objFormRegistroCliente = new FormRegistroCliente();
@@ -496,8 +488,6 @@ public class Inicio extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_RegistrarClienteActionPerformed
 
-=======
->>>>>>> 41a9f57aeb74eff43c99e51d277d5787c916f9eb
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         FromResumenDeGanancias a = new FromResumenDeGanancias();
@@ -513,7 +503,7 @@ public class Inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Compras;
     private javax.swing.JMenuItem InventarioMenuItem;
-    private javax.swing.JMenuItem MEditar;
+    private javax.swing.JMenuItem MEditarP;
     private javax.swing.JMenuItem RegistrarCliente;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu fileMenu;

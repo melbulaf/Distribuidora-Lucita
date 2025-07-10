@@ -4,9 +4,9 @@ import Proyect.Model.Producto;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class FormEditar extends javax.swing.JPanel {
+public class FormEditarProducto extends javax.swing.JPanel {
 
-    public FormEditar() {
+    public FormEditarProducto() {
         initComponents();
     }
 

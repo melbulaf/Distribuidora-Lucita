@@ -25,12 +25,15 @@ public class Inicio extends javax.swing.JFrame {
     private FormInventario objFormInventario;
     private FormHistoriaCompra objFormHCompras;
     private FormProducto objFormNProducto;
-    private FormEditar objFormEditar;
+    private FormEditarProducto objFormEditar;
     private FormRegistrarPedido objFormPedido;
     private javax.swing.JInternalFrame jifFormRutas;
     private FormRutas objFormRutas;
     private FormRegistroCliente objFormRegistroCliente;
     private javax.swing.JInternalFrame jifFormRegistroCliente;
+    private javax.swing.JInternalFrame jifFormEditarCliente;
+    private EditarCliente objFormEditarCliente;
+
     
     
     // === CONSTRUCTOR ===
@@ -87,12 +90,12 @@ public class Inicio extends javax.swing.JFrame {
         jifFormNProducto.setSize(700,500);
         jifFormNProducto.setVisible(false);
         
-        //Editar
+        //Editar Producto
         jifFormEditar.setClosable(true);
         jifFormEditar.setIconifiable(true);
         jifFormEditar.setMaximizable(true);
         jifFormEditar.setResizable(true);
-        objFormEditar = new FormEditar();
+        objFormEditar = new FormEditarProducto();
         jifFormEditar.setContentPane(objFormEditar);
         jifFormEditar.setSize(700,500);
         jifFormEditar.setVisible(false);
@@ -115,7 +118,13 @@ public class Inicio extends javax.swing.JFrame {
         jifFormRegistroCliente.setVisible(false);
         desktopPane.add(jifFormRegistroCliente);
 
-        
+        // Editar Cliente
+        jifFormEditarCliente = new javax.swing.JInternalFrame("Editar Cliente", true, true, true, true);
+        objFormEditarCliente = new EditarCliente();
+        jifFormEditarCliente.setContentPane(objFormEditarCliente);
+        jifFormEditarCliente.setSize(800, 500);
+        jifFormEditarCliente.setVisible(false);
+        desktopPane.add(jifFormEditarCliente);
         
     }
     //Metodo para centrar los Internal FrameAdd commentMore actions
@@ -151,6 +160,7 @@ public class Inicio extends javax.swing.JFrame {
         Compras = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         RegistrarCliente = new javax.swing.JMenuItem();
+        jMenuEditarC = new javax.swing.JMenuItem();
         menuItemNuevoProducto = new javax.swing.JMenuItem();
         MEditarP = new javax.swing.JMenuItem();
         menuItemRutaDelDia = new javax.swing.JMenuItem();
@@ -285,6 +295,14 @@ public class Inicio extends javax.swing.JFrame {
         });
         fileMenu.add(RegistrarCliente);
 
+        jMenuEditarC.setText("Editar cliente");
+        jMenuEditarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEditarCActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuEditarC);
+
         menuItemNuevoProducto.setText("Nuevo producto");
         menuItemNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,7 +434,7 @@ public class Inicio extends javax.swing.JFrame {
             objFormNProducto = new FormProducto();
             jifFormNProducto = new javax.swing.JInternalFrame("Agregar Nuevo Producto", true, true, true, true);
             jifFormNProducto.setContentPane(objFormNProducto);
-            jifFormNProducto.setSize(700, 500);
+            jifFormNProducto.setSize(800, 500);
             desktopPane.add(jifFormNProducto);
             jifFormNProducto.setVisible(true);
             centrarInternalFrame(jifFormNProducto);
@@ -432,7 +450,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void MEditarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEditarPActionPerformed
         if (jifFormEditar == null || jifFormEditar.isClosed()) {
-            objFormEditar = new FormEditar();
+            objFormEditar = new FormEditarProducto();
             jifFormEditar = new javax.swing.JInternalFrame("Editar Producto", true, true, true, true);
             jifFormEditar.setContentPane(objFormEditar);
             jifFormEditar.setSize(700,500);
@@ -498,6 +516,25 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuEditarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEditarCActionPerformed
+        if (jifFormEditarCliente == null || jifFormEditarCliente.isClosed()) {
+        objFormEditarCliente = new EditarCliente();
+        jifFormEditarCliente = new javax.swing.JInternalFrame("Editar Cliente", true, true, true, true);
+        jifFormEditarCliente.setContentPane(objFormEditarCliente);
+        jifFormEditarCliente.setSize(800, 500);
+        desktopPane.add(jifFormEditarCliente);
+        jifFormEditarCliente.setVisible(true);
+        centrarInternalFrame(jifFormEditarCliente);
+    } else {
+        jifFormEditarCliente.setVisible(true);
+        centrarInternalFrame(jifFormEditarCliente);
+        jifFormEditarCliente.toFront();
+        try {
+            jifFormEditarCliente.setSelected(true);
+        } catch (java.beans.PropertyVetoException ex) {}
+    }
+    }//GEN-LAST:event_jMenuEditarCActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -507,6 +544,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem RegistrarCliente;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenuItem jMenuEditarC;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JInternalFrame jifFormEditar;

@@ -7,6 +7,7 @@
  *
  * @author Jorkman
  */
+
 package Proyect.Model;
 
 import java.io.*;
@@ -15,114 +16,179 @@ import java.util.List;
 
 public class Cliente {
 
+    // Atributos del cliente
     private String nombre;
     private String apellido;
-    private String telefono;  
+    private String telefono;
     private String correo;
     private String direccion;
-    private boolean urgente;
+    private boolean esUrgente;
 
-    private static final List<Cliente> clientes = new ArrayList<>();
-    private static final File ARCHIVO = new File("src/Proyect/Controler/BD/clientes.txt");
+    // Ruta del archivo donde se guardan los clientes
+    private static final String ARCHIVO = "src/Proyect/Controler/BD/clientes.txt";
 
-    // Constructor
-    public Cliente(String nombre, String apellido, String telefono, String correo, String direccion, boolean urgente) {
+    // Lista estática que contiene todos los clientes registrados en memoria
+    private static List<Cliente> listaClientes = new ArrayList<>();
+
+    // Constructor principal
+    public Cliente(String nombre, String apellido, String telefono, String correo, String direccion, boolean esUrgente) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.correo = correo;
         this.direccion = direccion;
-        this.urgente = urgente;
+        this.esUrgente = esUrgente;
     }
 
-    // Getters
+    // Métodos getters usados en los formularios
     public String getNombre() { return nombre; }
     public String getApellido() { return apellido; }
     public String getTelefono() { return telefono; }
     public String getCorreo() { return correo; }
     public String getDireccion() { return direccion; }
-    public boolean esUrgente() { return urgente; }
+    public boolean esUrgente() { return esUrgente; }
 
-    // Agregar cliente con validación de duplicados
-    public static void agregarCliente(Cliente nuevo) {
-        if (!existeCliente(nuevo.telefono, nuevo.correo, nuevo.nombre, nuevo.apellido)) {
-            clientes.add(nuevo);
+    // Devuelve la lista completa de clientes cargados en memoria
+    public static List<Cliente> getClientes() {
+        return listaClientes;
+    }
+
+    // Agrega un nuevo cliente a la lista y guarda los cambios en el archivo
+    public static void agregarCliente(Cliente c) {
+        listaClientes.add(c);
+        guardarClientes();
+    }
+
+    // Guarda todos los clientes en el archivo
+    public static void guardarClientes() {
+        try {
+            File archivo = new File(ARCHIVO);
+            if (!archivo.exists()) {
+                archivo.getParentFile().mkdirs();
+                archivo.createNewFile();
+            }
+
+            PrintWriter writer = new PrintWriter(new FileWriter(archivo));
+            for (Cliente c : listaClientes) {
+                writer.println(c.nombre + "%%" + c.apellido + "%%" + c.telefono + "%%" +
+                               c.correo + "%%" + c.direccion + "%%" + c.esUrgente);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
         }
     }
 
-    // Obtener lista
-    public static List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    // Cargar clientes desde archivo
+    // Carga los clientes desde el archivo al iniciar el programa
     public static void cargarClientes() {
-        clientes.clear();
+        listaClientes.clear();
+        File archivo = new File(ARCHIVO);
 
         try {
-            if (!ARCHIVO.exists()) {
-                ARCHIVO.getParentFile().mkdirs();
-                ARCHIVO.createNewFile();
+            if (!archivo.exists()) {
+                archivo.getParentFile().mkdirs();
+                archivo.createNewFile();
                 return;
             }
 
-            BufferedReader lector = new BufferedReader(new FileReader(ARCHIVO));
+            BufferedReader lector = new BufferedReader(new FileReader(archivo));
             String linea;
 
             while ((linea = lector.readLine()) != null) {
                 String[] partes = linea.split("%%");
                 if (partes.length == 6) {
-                    String nombre = partes[0];
-                    String apellido = partes[1];
-                    String telefono = partes[2];
-                    String correo = partes[3];
-                    String direccion = partes[4];
-                    boolean urgente = Boolean.parseBoolean(partes[5]);
-
-                    Cliente c = new Cliente(nombre, apellido, telefono, correo, direccion, urgente);
-
-                    // Validación al cargar: no añadir si ya existe
-                    if (!existeCliente(c.telefono, c.correo, c.nombre, c.apellido)) {
-                        clientes.add(c);
-                    }
-                } else {
-                    System.err.println("Línea mal formateada: " + linea);
+                    Cliente c = new Cliente(
+                        partes[0], partes[1], partes[2],
+                        partes[3], partes[4],
+                        Boolean.parseBoolean(partes[5])
+                    );
+                    listaClientes.add(c);
                 }
             }
 
             lector.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
     }
 
-    // Guardar clientes en el archivo
-    public static void guardarClientes() {
-        try {
-            if (!ARCHIVO.exists()) {
-                ARCHIVO.getParentFile().mkdirs();
-                ARCHIVO.createNewFile();
-            }
-
-            PrintWriter escritor = new PrintWriter(new FileWriter(ARCHIVO));
-
-            for (Cliente c : clientes) {
-                escritor.println(c.nombre + "%%" + c.apellido + "%%" + c.telefono + "%%" + c.correo + "%%" + c.direccion + "%%" + c.urgente);
-            }
-
-            escritor.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Validar duplicados por teléfono, correo o nombre+apellido
+    // Verifica si ya existe un cliente con el mismo teléfono, correo o nombre+apellido
     public static boolean existeCliente(String telefono, String correo, String nombre, String apellido) {
-        for (Cliente c : clientes) {
-            if ((c.getNombre().equalsIgnoreCase(nombre) && c.getApellido().equalsIgnoreCase(apellido)) || c.getTelefono().equals(telefono) || c.getCorreo().equalsIgnoreCase(correo)) {
+        for (Cliente c : listaClientes) {
+            if (c.telefono.equals(telefono) || c.correo.equals(correo) ||
+                (c.nombre.equalsIgnoreCase(nombre) && c.apellido.equalsIgnoreCase(apellido))) {
                 return true;
             }
         }
         return false;
+    }
+
+    // Busca un cliente exacto por nombre y apellido
+    public static Cliente buscarCliente(String nombre, String apellido) {
+        for (Cliente c : listaClientes) {
+            if (c.nombre.equalsIgnoreCase(nombre) && c.apellido.equalsIgnoreCase(apellido)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    // Verifica si existe otro cliente con los mismos datos al editar, ignorando al actual
+    public static boolean existeClienteEditando(Cliente actual, String telefono, String correo, String nombre, String apellido) {
+        for (Cliente c : listaClientes) {
+            if (c != actual &&
+                (c.telefono.equals(telefono) || c.correo.equals(correo) ||
+                 (c.nombre.equalsIgnoreCase(nombre) && c.apellido.equalsIgnoreCase(apellido)))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Edita el valor de un atributo de un cliente específico
+    public static boolean editarCliente(Cliente cliente, String parametro, String nuevoValor) {
+        if (cliente == null || parametro == null || nuevoValor == null) return false;
+
+        switch (parametro.toLowerCase()) {
+            case "nombre":
+                cliente.nombre = nuevoValor;
+                break;
+            case "apellido":
+                cliente.apellido = nuevoValor;
+                break;
+            case "teléfono":
+                cliente.telefono = nuevoValor;
+                break;
+            case "correo":
+                cliente.correo = nuevoValor;
+                break;
+            case "direccion":
+                cliente.direccion = nuevoValor;
+                break;
+            case "urgencia":
+                cliente.esUrgente = nuevoValor.equalsIgnoreCase("sí");
+                break;
+            default:
+                return false;
+        }
+
+        guardarClientes();
+        return true;
+    }
+
+    // Elimina un cliente si se encuentra por nombre y apellido
+    public static boolean eliminarCliente(String nombre, String apellido) {
+        Cliente cliente = buscarCliente(nombre, apellido);
+        if (cliente != null) {
+            listaClientes.remove(cliente);
+            guardarClientes();
+            return true;
+        }
+        return false;
+    }
+
+    // Permite forzar la recarga de clientes desde el archivo manualmente
+    public static void cargarClientesDesdeArchivo() {
+        cargarClientes();
     }
 }
